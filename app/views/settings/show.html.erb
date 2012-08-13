@@ -1,0 +1,13 @@
+<p>
+  <b>Agent prefix code:</b>
+  <%=h @setting.agent_prefix_code %>
+</p>
+
+<p>
+  <b>Agent last no:</b>
+  <%=h @setting.agent_last_no %>
+</p>
+
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>

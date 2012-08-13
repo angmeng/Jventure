@@ -1,0 +1,35 @@
+
+  <% title "Recruitment Incentive" %>
+<br />
+<%= link_to "New", new_sub_commission_path %> |
+ <%= link_to "Back to Menu", :controller => "member_area", :action => "base_setup" %>
+<br /><br />
+<table class="list" style="width:50%">
+  <thead>
+  <tr>
+    <th>Term</th>
+    <th>Policy year</th>
+    <th>Percentage</th>
+	<th>Action</th>
+  </tr>
+
+  </thead>
+
+  <tbody>
+
+<% @sub_commissions.each do |sub_commission| %>
+   <tr class="<%= cycle "odd", "even"  %>">
+    <td style="text-align: center"><%=h sub_commission.term %></td>
+    <td style="text-align: center"><%=h sub_commission.policy_year %></td>
+    <td style="text-align: center"><%=h sub_commission.percentage %></td>
+	<td style="text-align: center"><%= link_to "Edit", edit_sub_commission_path(sub_commission) %>
+	    | <%= link_to "Remove", sub_commission, :method => :delete, :confirm => "Are you sure?" %>
+	</td>
+   
+  </tr>
+<% end %>
+   </tbody>
+</table>
+
+<br />
+

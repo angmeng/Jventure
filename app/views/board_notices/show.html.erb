@@ -1,0 +1,28 @@
+<% title "New board notice" %>
+<br />
+
+<%= link_to 'Edit', edit_board_notice_path(@board_notice) %> |
+<%= link_to 'Back', board_notices_path %>
+<br />
+<br />
+
+ <div style="background: #56A5EC;padding: 10px 10px 10px 10px;margin: 2px 2px 2px 2px;color:white;font-weight:bolder">
+  <%= @board_notice.title %>
+ </div>
+<br />
+
+  <b>Content:</b><br />
+  <div style="background: #EDE275;padding: 10px 10px 10px 10px;margin: 2px 2px 2px 2px;">
+  <%= @board_notice.content %>
+  </div>
+<br />
+<p>
+  <b>Public:</b>
+  <%=h @board_notice.public %>
+</p>
+<p>
+  <b>Suspend:</b>
+  <%=h @board_notice.suspend %>
+</p>
+
+

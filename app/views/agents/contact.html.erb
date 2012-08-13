@@ -1,0 +1,36 @@
+<% title "Contact" %>
+<br />
+<%= link_to "PDF", contact_agents_path(:format => "pdf") %>
+<br />
+
+<% paginated_section @agents do %>
+<br /><br />
+<table class="list">
+  <thead>
+    <tr>
+    <th>Code</th>
+    <th>Upline</th>
+    <th>Email</th>
+    <th>Mobile</th>
+    <th>Bank Account</th>
+    <th>Birthday</th>
+  </tr>
+</thead>
+   <tbody>
+  <% for agent in @agents %>
+    <tr class="<%= cycle "odd", "even"  %> ">
+      <td><%=h agent.screen_name %></td>
+      <td><%=h agent.upline_status %></td>
+      <td><%=h agent.email %></td>
+      <td><%=h agent.mobile_number %></td>
+      <td>  <%=h agent.bank_status %>    </td>
+      <td style="text-align: center"> <%=h agent.birthday_status %>  </td>
+    </tr>
+  <% end %>
+   </tbody>
+</table>
+  <% end %>
+   <br />
+  <%= page_entries_info @agents, :entry_name => 'agent' %>
+
+

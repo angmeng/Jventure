@@ -1,0 +1,26 @@
+<br />
+<fieldset style="background-color:#ECD872">
+  <legend style="background-color:#ECD872">Rookie for <%= agent.screen_name  %> </legend>
+
+  <table style="width:100%">
+    <% agent.licenses.in_groups_of(6, false) do |row| %>
+    <tr>
+      <% for lc in row %>
+      <td align="center">
+        <%= image_tag("search_result.png", :size => "50x50") %><br />
+         <%= lc.code %><br />
+         <%= lc.fullname %>
+      
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+</fieldset>
+  <br />
+
+
+
+
+
+

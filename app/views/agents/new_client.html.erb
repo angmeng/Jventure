@@ -1,0 +1,7 @@
+  <% title "New proposal" %>
+
+<br />
+<%= link_to "Back", new_proposal_agent_path(:id => session[:proposal_agent_id]) %>
+
+  <%= render :partial => 'new_proposal', :locals => {:proposal => @proposal} %>
+

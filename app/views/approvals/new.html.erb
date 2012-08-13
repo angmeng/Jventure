@@ -1,0 +1,22 @@
+<% title "New Approval" %>
+<br />
+<%= link_to 'Back', approvals_path %> 
+<br /><br />
+
+<% form_for(@approval, :html => { :multipart  => true  }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :approval_date, "Import Date" %><br />
+    <%= f.date_select :approval_date %>
+  </p>
+      <p>  
+      <%= f.label :document, "CSV file" %>  <br />
+      <%= f.file_field :document %>  
+   </p>
+ <br /><br />
+  <p>
+    <%= f.submit 'Create' %> 
+  </p>
+<% end %>
+

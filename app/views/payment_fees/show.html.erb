@@ -1,0 +1,35 @@
+<% title "Payment fee" %>
+<br />
+
+<p>
+<%= link_to 'Edit', edit_payment_fee_path(@payment_fee) %> |
+<%= link_to 'Back', payment_fees_path %>
+</p>
+<br />
+
+<p>
+  <b>Name:</b>
+  <%=h @payment_fee.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @payment_fee.description %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%=h @payment_fee.amount %>
+</p>
+<p>
+  <b>Is Enabled:</b>
+  <%=h @payment_fee.is_enabled %>
+</p>
+<p>
+  <b>Related Column:</b>
+  <%=h @payment_fee.related_column %>
+</p>
+<p>
+  <b>Related Value:</b>
+  <%=h @payment_fee.related_value %>
+</p>

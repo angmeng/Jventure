@@ -1,0 +1,15 @@
+<br />
+
+<% form_tag cancel_proposal_path(@proposal) do %>
+<p>
+  <b>Cancel Date</b>
+</p>
+<p>
+  <%= calendar_date_select_tag "cancel_date", Date.today %>
+</p>
+
+<br />
+
+<%= submit_tag "Confirm" %> | 
+<%= link_to "Back", @proposal %>
+<% end %>

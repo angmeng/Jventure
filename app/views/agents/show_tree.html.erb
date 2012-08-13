@@ -1,0 +1,77 @@
+<% content_for :head do %>
+  <script type="text/javascript" src="/javascripts/simpletreemenu.js">
+
+/***********************************************
+* Simple Tree Menu- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/simpletree.css" />
+<% end %>
+
+
+<% title "Agent" %>
+
+<br />
+
+<%= link_to "Back", @agent %>
+<br /><br />
+
+<table>
+  <tr>
+    <td>
+      <p> <strong>Code : </strong><%= link_to @agent.code, @agent %></p>
+    </td>
+    <td>
+      <p><strong>Fullname : </strong> <%=h @agent.fullname %></p>
+    </td>
+  <td>
+      <p><strong>Upline: </strong> <%=h @agent.upline_status %></p>
+    </td>
+  </tr>
+</table>
+
+<br />
+
+<fieldset>
+  <legend>View Type</legend>
+  <table>
+    <tr>
+      <td><%= link_to "Table", show_downlines_agent_path(@agent, :level_id => 0) %> | </td>
+      <td><%= link_to "Hierarchy", show_hierarchy_agent_path(@agent, :search_agent_id => @agent.id)  %> | </td>
+      <td><%= link_to "Tree", show_tree_agent_path(@agent)  %> </td>
+    </tr>
+  </table>
+
+</fieldset>
+
+<br />
+
+<fieldset>
+  <legend>Downlines</legend>
+  
+<a href="javascript:ddtreemenu.flatten('treemenu1', 'expand')">Expand All</a> | 
+<a href="javascript:ddtreemenu.flatten('treemenu1', 'contact')">Collapse All</a>
+<br /><br />
+   <ul id="treemenu1" class="treeview">
+    <%= display_tree_view(@agent, nil) %>
+  </ul>
+  
+</fieldset>
+
+<br />
+<script type="text/javascript">
+
+//ddtreemenu.createTree(treeid, enablepersist, opt_persist_in_days (default is 1))
+
+ddtreemenu.createTree("treemenu1", false)
+//ddtreemenu.createTree("treemenu2", false)
+
+</script>
+
+
+
+

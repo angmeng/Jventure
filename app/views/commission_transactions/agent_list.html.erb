@@ -1,0 +1,60 @@
+
+
+<% title "List of agents for printing commission " + session[:from].to_s + " - " + session[:to].to_s %>
+
+<br />
+<%= link_to "Back", commission_date_commission_transactions_path %> |
+<%= link_to "PDF", agent_list_commission_transactions_path(:format => "pdf") %>
+<br /><br />
+<table class="list">
+  <thead>
+    <tr>
+    <th>Agent</th>
+    <th>Bank Account</th>
+    <th>Basic Commission</th>
+    <th>Overriding Commission</th>
+    <th>Misc.</th>
+    <th>Total</th>
+    <th>Action</th>
+  </tr>
+</thead>
+   <tbody>
+
+     <% total_basic = 0.0
+        total_sub = 0.0
+        total_misc = 0.0
+     %>
+<% @agents.each do |report| %>
+     <% total_basic += report.basic_commission
+        total_sub += report.sub_commission
+        total_misc += report.misc_amount
+     %>
+
+   <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+     <td align="center"><%=h report.code %></td>
+     <td align="center"><%=h report.bank_account %></td>
+     <td align="center"><%=h number_with_precision(report.basic_commission, :precision => 2) %></td>
+     <td align="center"><%=h number_with_precision(report.sub_commission, :precision => 2) %></td>
+     <td align="center"><%=h number_with_precision(report.misc_amount, :precision => 2) %></td>
+     <td align="center"><%=h number_with_precision(report.total, :precision => 2) %></td>
+     <td align="center">
+         <%= link_to("Print", {:action => "preview", :id => report.agent_id}, {:target => "_blank"})  %> |
+         <%= link_to "Remove", remove_agent_commission_transaction_path(report)  %>
+     </td>
+  </tr>
+
+<% end %>
+
+  <tr>
+    <td colspan="7"><hr /></td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+    <td align="center"><%= number_with_precision(total_basic, :precision => 2)  %> </td>
+    <td align="center"><%= number_with_precision(total_sub, :precision => 2)  %> </td>
+    <td align="center"><%= number_with_precision(total_misc, :precision => 2)  %> </td>
+    <td align="center"><%= number_with_precision(total_basic + total_sub + total_misc, :precision => 2)  %> </td>
+  </tr>
+
+      </tbody>
+</table>

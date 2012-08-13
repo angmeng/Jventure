@@ -1,0 +1,152 @@
+<% title "Agent" %>
+
+<br />
+<p>
+  <% if is_admin? %>
+   
+	<%= link_to "Edit", edit_agent_path(@agent) %> |
+    <%= link_to "Change Password", change_password_agent_path(@agent) %>| 
+	<%= link_to "Destroy", @agent, :confirm => 'Are you sure?', :method => :delete %> |
+
+	<%= link_to "View All", agents_path %>
+	<% link_to "PDF", agent_path(@agent, :format => "pdf") %> 
+   <% elsif is_agent? %>
+   
+      <% if @agent.is_himself?(current_id) %>
+	      <%= link_to "Edit", edit_agent_path(@agent) %> |
+	      <%= link_to "Change Password", change_password_agent_path(@agent) %>
+		  
+      <% else %>
+          <%= link_to "View All", agents_path %>
+      <% end %>
+   <% end %>
+</p>
+<br />
+<% if is_admin? %>
+  <div>
+    <%= generate_previous_next_label(@first, @previous, @next, @last) %>
+  </div>
+<% end %>
+<br />
+<fieldset>
+  <legend>Upline
+  </legend>
+  <p>
+  <strong>Upline:</strong>
+  <%=h @agent.upline_status %>
+</p>
+
+</fieldset>
+
+<br />
+
+	<div id="gallery-background">
+  <table style="width:600px">
+    <tbody>
+      <tr>
+        <th style="text-align:right;width:28%">Code :</th>
+        <td><%=h @agent.code %> &nbsp;&nbsp; <%= link_to "View My Downlines", show_downlines_agent_path(@agent) %>
+        </td>
+      </tr>
+
+      <tr>
+        <th style="text-align:right">
+          Fullname : </th><td>
+          <%=h @agent.fullname %>
+        </td>
+      </tr>
+
+
+      <tr>
+      <th style="text-align:right">New Ic Number : </th><td>
+      <%=h @agent.new_ic_number %></td>
+    </tr>
+
+    <tr>
+      <th style="text-align:right">Resident Address : </th>
+      <td><%=h @agent.resident_address %></td>
+    </tr>
+
+    <tr>
+      <th style="text-align:right">Residence Postcode : </th><td>
+<%=h @agent.residence_postcode %></td>
+    </tr>
+
+    <tr>
+      <th style="text-align:right">Residence City : </th>
+      <td><%=h @agent.residence_city %></td>
+    </tr>
+    <tr>
+      <th style="text-align:right">Residence State : </th>
+      <td><%=h @agent.residence_state %></td>
+    </tr>
+    <tr>
+      <th style="text-align:right">Residence Phone Number : </th><td>
+      <%=h @agent.residence_phone_number %></td
+    </tr>
+    <tr>
+      <th style="text-align:right">Mobile Number : </th>
+      <td><%=h @agent.mobile_number %></td>
+    </tr>
+
+    <tr>
+      <th style="text-align:right">Email : </th>
+      <td><%=h @agent.email %></td>
+    </tr>
+    
+    <tr>
+      <th style="text-align:right">Birthday : </th>
+      <td><%=h @agent.birthday %></td>
+    </tr>
+    
+    <tr>
+      <th style="text-align:right">Account Bank : </th>
+      <td> <%=h @agent.account_bank %></td>
+    </tr>
+    <tr>
+      <th style="text-align:right">Account Number : </th>
+      <td><%=h @agent.account_number %></td>
+    </tr>
+	<% if is_admin? %>
+     <tr>
+      <th style="text-align:right">Master Agent : </th>
+      <td><%=h @agent.master_agent %></td>
+    </tr>
+	<tr>
+      <th style="text-align:right">Credits : </th>
+      <td><%=h @agent.credits %></td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>
+
+<% if is_admin? %>
+<br />
+<div>
+  <%= generate_previous_next_label(@first, @previous, @next, @last) %>
+</div>
+<% end %>
+<br />
+<p>
+  <% if is_admin? %>
+ 
+	<%= link_to "Edit", edit_agent_path(@agent) %> |
+    <%= link_to "Change Password", change_password_agent_path(@agent) %>| 
+	<%= link_to "Destroy", @agent, :confirm => 'Are you sure?', :method => :delete %> |
+	<%= link_to "View All", agents_path %>
+   <% elsif is_agent? %>
+      <% if @agent.is_himself?(current_id) %>
+	      <%= link_to "Edit", edit_agent_path(@agent) %> |
+	      <%= link_to "Change Password", change_password_agent_path(@agent) %>
+		  
+      <% else %>
+          <%= link_to "View All", agents_path %>
+      <% end %>
+   <% end %>
+ 	
+</p>
+
+
+

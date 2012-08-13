@@ -1,0 +1,36 @@
+<% title "Listing contacts" %>
+
+<br />
+
+<% paginated_section @contacts do %>
+
+<table class="list">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Telephone</th>
+    <th>Fax</th>
+    <th>Read</th>
+    <th>Action</th>
+  </tr>
+</thead>
+   <tbody>
+<% @contacts.each do |contact| %>
+  <tr class="<%= cycle "odd", "even"  %> ">
+    <td><%=h contact.name %></td>
+    <td><%=h contact.telephone %></td>
+    <td><%=h contact.fax %></td>
+    <td style="text-align: center"><%=h contact.read %></td>
+    <td style="text-align: center"><%= link_to 'Show', contact %>
+    <%= link_to 'Edit', edit_contact_path(contact) %>
+    <%= link_to 'Destroy', contact, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+     </tbody>
+</table>
+  <% end %>
+   <br />
+  <%= page_entries_info @contacts, :entry_name => 'contact' %>
+<br />
+
+

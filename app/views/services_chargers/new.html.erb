@@ -1,0 +1,44 @@
+<% title "New services_charger" %>
+<br />
+<%= link_to 'Back', services_chargers_path %>
+<br />
+<% form_for(@services_charger) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :entry_title %><br />
+    <%= f.text_field :entry_title, :size => 80 %>
+  </p>
+  <p>
+    <%= f.label :entry_description %><br />
+    <%= f.text_area :entry_description, :size => "80x4" %>
+  </p>
+  <p>
+    <%= f.label :renewal_title %><br />
+    <%= f.text_field :renewal_title, :size => 80 %>
+  </p>
+  <p>
+    <%= f.label :renewal_description %><br />
+    <%= f.text_area :renewal_description, :size => "80x4" %>
+  </p>
+  <p>
+    <%= f.label :entry_amount %><br />
+    <%= f.text_field :entry_amount %>
+  </p>
+  <p>
+    <%= f.label :renewal_amount %><br />
+    <%= f.text_field :renewal_amount %>
+  </p>
+  <p>
+    <%= f.label :start_from %><br />
+    <%= f.calendar_date_select :start_from %>
+  </p>
+  <p>
+    <%= f.label :end_date %><br />
+    <%= f.calendar_date_select :end_date %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+

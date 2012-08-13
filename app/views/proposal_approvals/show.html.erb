@@ -1,0 +1,23 @@
+<p>
+  <b>Proposal:</b>
+  <%=h @proposal_approval.proposal_id %>
+</p>
+
+<p>
+  <b>Approval year:</b>
+  <%=h @proposal_approval.approval_year %>
+</p>
+
+<p>
+  <b>Approved:</b>
+  <%=h @proposal_approval.approved %>
+</p>
+
+<p>
+  <b>Approved date:</b>
+  <%=h @proposal_approval.approved_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_proposal_approval_path(@proposal_approval) %> |
+<%= link_to 'Back', proposal_approvals_path %>

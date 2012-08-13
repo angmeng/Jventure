@@ -1,0 +1,26 @@
+<% title "Commissions" %>
+<br />
+<table>
+  <tr>
+    <th>Level 0</th>
+    <th>Level 1</th>
+    <th>Level 2</th>
+    <th>Level 3</th>
+    <th>Level 4</th>
+    <th>Level 5</th>
+  </tr>
+  <% for commission in @commissions %>
+    <tr>
+      <td><%=h commission.level_0 %></td>
+      <td><%=h commission.level_1 %></td>
+      <td><%=h commission.level_2 %></td>
+      <td><%=h commission.level_3 %></td>
+      <td><%=h commission.level_4 %></td>
+      <td><%=h commission.level_5 %></td>
+      <td><%= link_to "Show", commission %></td>
+      <td><%= link_to "Edit", edit_commission_path(commission) %></td>
+      <td><%= link_to "Destroy", commission, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+

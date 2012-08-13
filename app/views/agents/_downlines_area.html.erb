@@ -1,0 +1,35 @@
+<% if @agents %>
+
+  <table class="list">
+  <thead>
+    <tr>
+    <th>Code</th>
+    <th>Fullname</th>
+    <th>New Ic Number</th>
+    <th>Residence City</th>
+    <th>Residence State</th>
+    <th>Mobile Number</th>
+    <th>Action</th>
+
+  </tr>
+</thead>
+   <tbody>
+  <% for agent in @agents %>
+    <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+      <td><%=h agent.code %></td>
+      <td><%=h agent.fullname %></td>
+      <td><%=h agent.new_ic_number %></td>
+      <td><%=h agent.residence_city %></td>
+      <td><%=h agent.residence_state %></td>
+      <td><%=h agent.mobile_number %></td>
+      <td>
+        <% if is_admin? %>
+          <%= link_to "Show", agent %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+   </tbody>
+</table>
+
+<% end %>

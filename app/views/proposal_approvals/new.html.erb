@@ -1,0 +1,27 @@
+<h1>New proposal_approval</h1>
+
+<% form_for(@proposal_approval) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :proposal_id %><br />
+    <%= f.text_field :proposal_id %>
+  </p>
+  <p>
+    <%= f.label :approval_year %><br />
+    <%= f.text_field :approval_year %>
+  </p>
+  <p>
+    <%= f.label :approved %><br />
+    <%= f.check_box :approved %>
+  </p>
+  <p>
+    <%= f.label :approved_date %><br />
+    <%= f.date_select :approved_date %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', proposal_approvals_path %>

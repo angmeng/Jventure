@@ -1,0 +1,279 @@
+<% form_for @proposal do |f| %>
+  <%= f.error_messages %>
+
+
+   <p>
+    <%= f.label :agent_id %><br />
+	<% if is_admin? %>
+	  <%= f.text_field_with_auto_complete :agent_name, {:size => 50}, { :url => show_agent_proposals_path, :method => :get, :with => "'search='+element.value" } %>
+	<% elsif is_agent? %>
+	  <%= f.text_field :agent_name_for_agent %>
+	<% end %>
+    
+  </p>
+
+   <p>
+    <%= f.label :shared_agent_id %><br />
+	<% if is_admin? %>
+	  <%= f.text_field_with_auto_complete :shared_agent_name, {:size => 50}, { :url => show_agent_proposals_path, :method => :get, :with => "'search='+element.value" } %>
+	<% elsif is_agent? %>
+	  <%= f.text_field :shared_agent_name_for_agent %>
+	<% end %>
+  </p>
+
+  <p>
+    <%= f.label :proposal_number %><br />
+    <%= f.text_field :proposal_number, :maxlength => 20, :size => 45 %>
+  </p>
+
+  <% if @proposal.approved %>
+
+   <p>
+    <%= f.label :approval_date %><br />
+    <%= f.date_select :approval_date %>
+   </p>
+
+    <p>
+    <%= f.label :policy_number %><br />
+    <%= f.text_field :policy_number, :maxlength => 20, :size => 45 %>
+    </p>
+  <% end %>
+
+   <p>
+    <%= f.label :fullname %><br />
+    <%= f.text_field :fullname, :maxlength => 100, :size => 45 %>
+  </p>
+  <p>
+    <%= f.label :new_ic_number %><br />
+    <%= f.text_field :new_ic_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :old_ic_number %><br />
+    <%= f.text_field :old_ic_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :birth_certificate %><br />
+    <%= f.text_field :birth_certificate, :maxlength => 20 %>
+  </p>
+  <p>
+    <%= f.label :passport %><br />
+    <%= f.text_field :passport, :maxlength => 20 %>
+  </p>
+  <p>
+    <%= f.label :date_of_birth %><br />
+    <%= f.date_select :date_of_birth, :start_year => 1930, :end_year => Time.now.year %>
+  </p>
+  <p>
+    <% f.label :age %><br />
+    <% f.text_field :age, :maxlength => 2, :size => 5 %>
+  </p>
+  <p>
+    <%= f.label :resident_address %><br />
+    <%= f.text_area :resident_address, :size => "60x8" %>
+  </p>
+  <p>
+    <%= f.label :residence_postcode %><br />
+    <%= f.text_field :residence_postcode, :maxlength => 5 %>
+  </p>
+  <p>
+    <%= f.label :residence_city %><br />
+    <%= f.text_field :residence_city, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= f.label :residence_state %><br />
+    <%= f.text_field :residence_state, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= f.label :residence_phone_number %><br />
+    <%= f.text_field :residence_phone_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :mobile_number %><br />
+    <%= f.text_field :mobile_number, :maxlength => 12, :size => 20 %>
+  </p>
+
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email, :maxlength => 45, :size => 45 %>
+  </p>
+ 
+
+  <br/><br/>
+  <fieldset>
+    <legend>
+      Proposer (if other than life to be assured)
+    </legend>
+<br />
+      <p>
+    <%= f.label :proposer_fullname %><br />
+    <%= f.text_field :proposer_fullname, :maxlength => 45, :size => 45 %>
+  </p>
+  <p>
+    <%= f.label :proposer_new_ic_number %><br />
+    <%= f.text_field :proposer_new_ic_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :proposer_old_ic_number %><br />
+    <%= f.text_field :proposer_old_ic_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :proposer_birth_certificate %><br />
+    <%= f.text_field :proposer_birth_certificate, :maxlength => 20, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :proposer_passport %><br />
+    <%= f.text_field :proposer_passport, :maxlength => 20, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :proposer_date_of_birth %><br />
+    <%= f.date_select :proposer_date_of_birth, :start_year => 1930, :end_year => Time.now.year %>
+  </p>
+  <p>
+    <% f.label :proposer_age %><br />
+    <% f.text_field :proposer_age, :maxlength => 2, :size => 5 %>
+  </p>
+  <p>
+    <%= f.label :proposer_resident_address %><br />
+    <%= f.text_area :proposer_resident_address, :size => "60x8" %>
+  </p>
+  <p>
+    <%= f.label :proposer_residence_postcode %><br />
+    <%= f.text_field :proposer_residence_postcode, :maxlength => 5 %>
+  </p>
+  <p>
+    <%= f.label :proposer_residence_city %><br />
+    <%= f.text_field :proposer_residence_city, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= f.label :proposer_residence_state %><br />
+    <%= f.text_field :proposer_residence_state, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= f.label :proposer_residence_phone_number %><br />
+    <%= f.text_field :proposer_residence_phone_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :proposer_mobile_number %><br />
+    <%= f.text_field :proposer_mobile_number, :maxlength => 12, :size => 20 %>
+  </p>
+ 
+  <p>
+    <%= f.label :proposer_relationship %><br />
+    <%= f.text_field :proposer_relationship, :maxlength => 45 %>
+  </p>
+
+  <p>
+    <%= f.label :proposer_email %><br />
+    <%= f.text_field :proposer_email, :maxlength => 45 %>
+  </p>
+ 
+  <br />
+  </fieldset>
+<br />
+  <p>
+    <%= f.label :mode_of_payment_id %><br />
+    <%= f.select :mode_of_payment_id, ModeOfPayment.all(:order => "name").map {|c| [c.name, c.id]}, {:include_blank => true} %>
+  </p>
+  <p>
+    <%= f.label :payment_method_id %><br />
+    <%= f.select :payment_method_id, PaymentMethod.all(:order => "name").map {|d| [d.name, d.id]}, {:include_blank => true}, :onChange => remote_function(:url => {:action => 'show_payment_info'}, :with => "'id=' + this.value") %>
+  </p>
+  
+
+  <% payment = PaymentMethod.find(@proposal.payment_method_id) rescue nil %>
+  <% if payment and payment.name.include?("Credit Card") %>
+  <div id="payment_info">
+    <fieldset>
+      <legend>Credit Card Detail</legend>
+        <p><%= f.label :credit_card_number %><br />
+         <%= f.text_field :credit_card_number, :maxlength => 20 %></p>
+        <p><%= f.label :credit_card_type %><br />
+         <%= f.text_field :credit_card_type, :maxlength => 15, :size => 20 %></p>
+        <p><%= f.label :owner_name %><br />
+         <%= f.text_field :owner_name, :maxlength => 45 %></p>
+
+    </fieldset>
+  </div>
+  <% else %>
+  <div id="payment_info" style="display:none">
+    <fieldset>
+      <legend>Credit Card Detail</legend>
+        <p><%= f.label :credit_card_number %><br />
+         <%= f.text_field :credit_card_number, :maxlength => 20 %></p>
+        <p><%= f.label :credit_card_type %><br />
+         <%= f.text_field :credit_card_type, :maxlength => 15, :size => 20 %></p>
+        <p><%= f.label :owner_name %><br />
+         <%= f.text_field :owner_name, :maxlength => 45 %></p>
+
+    </fieldset>
+  </div>
+  <% end %>
+  
+  <br />
+  <p>
+  <%= f.check_box :is_backdate %> &nbsp;is backdate? &nbsp;&nbsp;
+    <%= f.label :backdate %>
+    <%= f.date_select :backdate %>
+  </p>
+  <br />
+
+  <table>
+    <tr>
+      <td>  <p>
+    <%= f.label :plan_id %><br />
+    <%= f.select :plan_id, Plan.all(:order => "name").map {|p| [p.name, p.id]} %>
+  </p></td>
+
+      <td>  <p>
+    <%= f.label :sum_assured, "Premium" %><br />
+    <%= f.text_field :sum_assured, :maxlength => 10 %>
+  </p>
+      </td>
+      <td>
+          <p>
+    <%= f.label :policy_term %><br />
+    <%= f.text_field :policy_term, :maxlength => 10 %>
+  </p>
+      </td>
+      <td>
+          <p>
+    <%= f.label :premium_term %><br />
+    <%= f.text_field :premium_term, :maxlength => 10 %>
+  </p>
+      </td>
+      <td>
+          <p>
+    <%= f.label :modal_premium %><br />
+    <%= f.text_field :modal_premium, :maxlength => 10 %>
+  </p>
+      </td>
+    </tr>
+
+      <tr>
+       <td>
+        <p><%=  f.label :supplementary_benefit %><br />
+           <%= f.text_field :supplementary_benefit, :maxlength => 45 %></p>
+      </td>
+      <td>
+         <p><%= f.label :sb_sum_assured, "Premium" %><br />
+           <%= f.text_field :sb_sum_assured, :maxlength => 10 %></p>
+      </td>
+      <td>
+          <p><%= f.label :sb_policy_term %><br />
+             <%= f.text_field :sb_policy_term, :maxlength => 10 %></p>
+      </td>
+      <td>
+         <p> <%= f.label :sb_premium_term %><br />
+             <%= f.text_field :sb_premium_term, :maxlength => 10 %>
+         </p>
+      </td>
+      <td>
+          <p><%= f.label :sb_modal_premium %><br />
+             <%= f.text_field :sb_modal_premium, :maxlength => 10 %></p>
+      </td>
+    </tr>
+
+  </table>
+
+  <p><%= f.submit "Submit" %></p>
+<% end %>

@@ -1,0 +1,16 @@
+
+<% title "Edit Agent" %>
+<br />
+  <%= link_to "Show", @agent %>
+  <% if is_admin? %>
+  | <%= link_to "View All", agents_path %>
+  <% end %>
+
+  <br />
+  <br />
+<%= render :partial => 'form' %>
+
+
+<br />
+
+

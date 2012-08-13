@@ -1,0 +1,16 @@
+<% title "Setting" %>
+<br />
+<br />
+
+<% form_for(@setting) do |f| %>
+  <%= f.error_messages %>
+
+ <p>
+    <%= f.label :admin_email, "Administrator Email address" %><br />
+    <%= f.text_field :admin_email %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+

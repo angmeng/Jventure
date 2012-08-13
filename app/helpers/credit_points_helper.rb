@@ -1,0 +1,2 @@
+module CreditPointsHelper
+end

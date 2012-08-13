@@ -1,0 +1,26 @@
+<% title "Check agent qualification" %>
+<br /><br />
+<% form_tag check_agent_proposals_path do %>
+<table>
+  <tr>
+    <th>Agent Code</th>
+    <th>Check Date</th>
+  </tr>
+  <tr>
+    <td>
+      <%= text_field_tag "agent_code" %>
+    </td>
+     <td>
+      <%= calendar_date_select_tag "check_date" %>
+    </td>
+  </tr>
+   <tr>
+    <td>
+
+    </td>
+     <td>
+      <%= submit_tag "Check" %>
+    </td>
+  </tr>
+</table>
+<% end %>

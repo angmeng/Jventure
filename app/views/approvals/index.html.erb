@@ -1,0 +1,35 @@
+
+<% title "Approvals" %>
+<br />
+<%= link_to 'New', new_approval_path %> |
+<%= link_to "Back to Menu", :controller => "member_area", :action => "base_setup" %>
+<br />
+<br />
+
+<% paginated_section @approvals do %>
+<br />
+<table class="list" style="width:80%">
+	<thead>
+  <tr>
+    <th>Import date</th>
+	<th>File name</th>
+	<th>Action</th>
+  </tr>
+</thead>
+   <tbody>
+<% @approvals.each do |approval| %>
+  <tr class="<%= cycle "odd", "even"  %> ">
+    <td style="text-align: center"><%=h approval.approval_date %></td>
+    <td><%= link_to approval.document_file_name, approval.document.url %></td>
+    <td style="text-align: center"><%= link_to 'Show', approval %> | 
+    <%= link_to 'Destroy', approval, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+ </tbody>
+</table>
+
+<br />
+  <% end %>
+   <br />
+  <%= page_entries_info @approvals, :entry_name => 'Approval' %>
+<br />

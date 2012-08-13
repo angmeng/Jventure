@@ -1,0 +1,28 @@
+<p>
+  <b>Proposal:</b>
+  <%=h @commission_transaction.proposal_id %>
+</p>
+
+<p>
+  <b>Agent:</b>
+  <%=h @commission_transaction.agent_id %>
+</p>
+
+<p>
+  <b>Level paid:</b>
+  <%=h @commission_transaction.level_paid %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%=h @commission_transaction.amount %>
+</p>
+
+<p>
+  <b>Date paid:</b>
+  <%=h @commission_transaction.date_paid %>
+</p>
+
+
+<%= link_to 'Edit', edit_commission_transaction_path(@commission_transaction) %> |
+<%= link_to 'Back', commission_transactions_path %>

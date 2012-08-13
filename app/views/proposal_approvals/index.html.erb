@@ -1,0 +1,89 @@
+<% content_for :head do %>
+<script type="text/javascript">
+  function show_process() {
+		document.getElementById("process").style.display="block";
+                document.getElementById("reminder").style.display="none";
+	}
+
+</script>
+<% end  %>
+
+
+ <% title "Listing renewal proposals" %>
+<br />
+<% if @last_date %>
+  <em>Last reminder was <%= @last_date %> </em>
+<% else %>
+  <em>Last Reminder : Never done before</em>
+<% end %><br />
+
+<% unless @proposals.empty? %>
+  <%= link_to("Send reminder ", send_reminder_proposal_approvals_path,:onclick => "show_process();", :id => "reminder") %>
+<em>This will takes fews minutes</em>
+<%= image_tag("process.gif", :style => "display:none", :id => "process") %>
+<% end %>
+
+<br /><br />
+<% form_for @search do |f| %>
+<table>
+  <tr>
+    <th>Proposal No</th>
+    <th>Policy Number</th>
+    <th>New IC No</th>
+    <th>Action</th>
+  </tr>
+
+  <tr>
+    <td><%= f.text_field :proposal_number_equals  %> </td>
+    <td><%= f.text_field :policy_number_equals %></td>
+    <td><%= f.text_field :new_ic_number_like %></td>
+    <td><%= f.submit "Search" %></td>
+  </tr>
+
+</table>
+<% end %>
+
+<br />
+
+<% paginated_section @proposals do %>
+<br /><br />
+<table class="list">
+  <thead>
+  <tr>
+    <th>Proposal Number</th>
+    <th>Policy Number</th>
+    <th>Expiry Date</th>
+    <th>Agent</th>
+    <th>Life Assured</th>
+    <th>I/C No</th>
+    <th>Proposer</th>
+    <th>Premium</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% for ex in @proposals %>
+    <% proposal = ex.proposal %>
+    <tr class="<%= cycle "odd", "even"  %>">
+      <td><%=h proposal.proposal_number %></td>
+      <td style="text-align: left"><%= proposal.policy_status %></td>
+      <td style="text-align: center"><%=h proposal.expiry_date %></td>
+      <td><%=h proposal.agent_name %></td>
+      <td><%=h proposal.fullname %></td>
+      <td style="text-align: center"><%=h proposal.new_ic_number %></td>
+      <td style="text-align: left"><%=h proposal.proposer_status %></td>
+      <td style="text-align: right"><%=h number_to_currency(proposal.sum_assured) %></td>
+      
+      <td style="text-align: center">
+      <%= link_to "Show", edit_proposal_approval_path(proposal) %>
+     </td>
+    </tr>
+  <% end %>
+    </tbody>
+</table>
+  <% end %>
+   <br />
+  <%= page_entries_info @proposals, :entry_name => 'proposal' %>
+
+

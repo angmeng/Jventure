@@ -1,0 +1,23 @@
+#main {width:1000px; margin:0 auto; position:relative;}
+
+#header {height:80px; background:url(/images/header-bg.jpg) no-repeat left top;}
+#header, #content, #footer { font-size:0.75em;}
+
+.col-1, .col-2, .col-3 ,col-2_wide { float:left;}
+
+/*======= home.html =======*/
+#page1 #content .col-1 {width:280px; margin-right:40px;}
+#page1 #content .col-2 {width:500px; margin-right:40px;}
+#page1 #content .col-3 {width:280px;}
+
+#page1 #content .col-2_wide {width:500px; margin-right:10px;}/*ABBY HERE */
+
+/*======= about-us.html =======*/
+#page2 #content .col-1 {width:600px; margin-right:40px;}
+#page2 #content .col-2 {width:280px;}
+
+
+/*=========================*/
+
+
+#footer {height:90px; background:url(/images/footer-bg.jpg) no-repeat left top;}

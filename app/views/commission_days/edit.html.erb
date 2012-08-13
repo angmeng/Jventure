@@ -1,0 +1,37 @@
+<% title "Editing commission day" %>
+<%= link_to 'Show', @commission_day %> |
+<%= link_to 'Back', commission_days_path %>
+<br />
+<% form_for(@commission_day) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description, :size => 80  %>
+  </p>
+  <p>
+    <%= f.label :from_calculate_day, "From day" %><br />
+    <%= f.select :from_calculate_day, 1.upto(31).to_a %>
+  </p>
+  <p>
+    <%= f.label :to_calculate_day, "To day" %><br />
+    <%= f.select :to_calculate_day, 1.upto(31).to_a %>
+  </p>
+    <p>
+    <%= f.label :basic_commission, "Calculate Basic Commission" %><br />
+    <%= f.check_box :basic_commission %>
+  </p>
+  <p>
+    <%= f.label :overriding_commission, "Calculate Overriding Commission" %><br />
+    <%= f.check_box :overriding_commission %>
+  </p>
+     <p>
+    <%= f.label :renewal, "Calculate renewal Commission" %><br />
+    <%= f.check_box :renewal %>
+  </p>
+
+
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

@@ -1,0 +1,111 @@
+<fieldset>
+  <legend>Agent Hierarchy</legend>
+
+  <table style="width:100%">
+    <tr>
+      <td align="center">
+        <%= image_tag("me.jpg") %><br />
+        <%= @agent.screen_name %>
+      </td>
+    </tr>
+  </table>
+
+  <br />
+
+  <table style="width:100%">
+    <tr>
+      <% for lc in @agent.licenses %>
+      <td align="center">
+        <%= image_tag("level_0.png") %><br />
+        <%= link_to lc.screen_name, show_popup_hierarchy_agent_path(lc), :target => "_blank" %>
+      </td>
+      <% end %>
+    </tr>
+  </table>
+
+  <br />
+
+  <table style="width:100%">
+    <tr>
+      <% for one in @agent.level_1 %>
+      <td align="center">
+        <%= image_tag("level_1.png") %><br />
+        <%= link_to one.screen_name, show_popup_hierarchy_agent_path(one), :target => "_blank" %>
+      </td>
+      <% end %>
+    </tr>
+  </table>
+
+   <br />
+
+  <table style="width:100%">
+    <tr>
+      <% for two in @agent.level_2 %>
+      <td align="center">
+        <%= image_tag("level_2.png") %><br />
+        <%= link_to two.screen_name, show_popup_hierarchy_agent_path(two), :target => "_blank" %>
+      </td>
+      <% end %>
+    </tr>
+  </table>
+
+    <br />
+
+  <table style="width:100%">
+    <tr>
+      <% for three in @agent.level_3 %>
+      <td align="center">
+        <%= image_tag("level_3.png") %><br />
+        <%= link_to three.screen_name, show_popup_hierarchy_agent_path(three), :target => "_blank" %>
+      </td>
+      <% end %>
+    </tr>
+  </table>
+
+     <br />
+
+  <table style="width:100%">
+    <tr>
+      <% for four in @agent.level_4 %>
+      <td align="center">
+        <%= image_tag("level_4.png") %><br />
+        <%= link_to four.screen_name, show_popup_hierarchy_agent_path(four), :target => "_blank" %>
+      </td>
+      <% end %>
+    </tr>
+  </table>
+  
+    <br />
+
+  <%#*<table style="width:100%">%>
+    <%#*<tr>%>
+      <%# for five in @agent.level_5 %>
+      <%#*<td align="center">%>
+        <%#= image_tag("level_5.png") %><br />
+        <%#= link_to five.screen_name, show_popup_hierarchy_agent_path(five), :target => "_blank" %>
+      <%#*</td>%>
+      <%# end %>
+    <%#*</tr>%>
+  <%#*</table>%>
+  
+   <%#*<br />%>
+
+  <%#*<table style="width:100%">%>
+    <%#*<tr>%>
+      <%# for six in @agent.level_6 %>
+      <%#*<td align="center">%>
+        <%#= image_tag("level_6.png") %><br />
+        <%#= link_to six.screen_name, show_popup_hierarchy_agent_path(six), :target => "_blank" %>
+      <%#*</td>%>
+      <%# end %>
+    <%#*</tr>%>
+  <%#*</table>%>
+
+
+</fieldset>
+
+<br />
+
+
+
+

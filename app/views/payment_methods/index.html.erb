@@ -1,0 +1,28 @@
+<% title "Payment Methods" %>
+<br />
+ <%=  link_to 'New', new_payment_method_path %> |
+ <%= link_to "Back to Menu", :controller => "member_area", :action => "base_setup" %>
+<br /><br />
+<table class="list">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% for payment_method in @payment_methods %>
+     <tr class="<%= cycle "odd", "even"  %> ">
+      <td><%=h payment_method.name %></td>
+      <td><%=h payment_method.description %></td>
+      <td style="text-align: center"><%= link_to "Show", payment_method %> |
+      <%= link_to "Edit", edit_payment_method_path(payment_method) %> |
+      <%= link_to "Destroy", payment_method, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+    </tbody>
+</table>
+
+

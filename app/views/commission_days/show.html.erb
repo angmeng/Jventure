@@ -1,0 +1,32 @@
+
+<% title "Commission day" %>
+<%= link_to 'Edit', edit_commission_day_path(@commission_day) %> |
+<%= link_to 'Back', commission_days_path %>
+<br />
+<p>
+  <b>Description:</b>
+  <%=h @commission_day.description %>
+</p>
+
+<p>
+  <b>From Calculate day:</b>
+  <%=h @commission_day.from_calculate_day %>
+</p>
+<p>
+  <b>To Calculate day:</b>
+  <%=h @commission_day.to_calculate_day %>
+</p>
+<p>
+  <b>Including Basic Commission:</b>
+  <%=h @commission_day.basic_commission %>
+</p>
+<p>
+  <b>Including Overriding Commission:</b>
+  <%=h @commission_day.overriding_commission %>
+</p>
+<p>
+  <b>Including Renewal Commission:</b>
+  <%=h @commission_day.renewal %>
+</p>
+
+

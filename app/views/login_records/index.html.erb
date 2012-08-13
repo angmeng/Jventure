@@ -1,0 +1,46 @@
+<% title "Listing Login Records" %>
+
+<br />
+
+<% form_for @search do |f| %>
+<table>
+  <tr>
+    <th>Agent Code</th>
+    <th>Action</th>
+  </tr>
+
+  <tr>
+    <td><%= f.select :agent_id_equals, Agent.all(:order => "code").map {|ag| [ag.screen_name, ag.id]}, {:include_blank => true} %></td>
+    <td><%= f.submit "Search"  %></td>
+  </tr>
+</table>
+<% end %>
+
+<br />
+
+<% paginated_section @login_records do %>
+
+<table class="list">
+  <thead>
+  <tr>
+    <th>Datetime</th>
+    <th>Agent</th>
+    <th>Type</th>
+    <th>Ip address</th>
+  </tr>
+</thead>
+   <tbody>
+<% @login_records.each do |login_record| %>
+  <tr class="<%= cycle "odd", "even"  %> ">
+    <td style="text-align: center"><%=h login_record.created_at.strftime("%d-%m-%Y %H:%M") %> </td>
+    <td><%=h login_record.agent.screen_name %></td>
+    <td><%= login_record.item_category %></td>
+    <td><%=h login_record.ip_address %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+  <% end %>
+   <br />
+  <%= page_entries_info @login_records, :entry_name => 'Login Record' %>
+<br />

@@ -1,0 +1,24 @@
+<% title "Editing" %>
+
+<br />
+<% form_for(@sub_commission) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :term %><br />
+    <%= f.text_field :term %>
+  </p>
+  <p>
+    <%= f.label :policy_year %><br />
+    <%= f.text_field :policy_year %>
+  </p>
+  <p>
+    <%= f.label :percentage %><br />
+    <%= f.text_field :percentage %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %> | <%= link_to 'Back', @sub_commission.plan %>
+  </p>
+<% end %>
+
+

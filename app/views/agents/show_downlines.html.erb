@@ -1,0 +1,62 @@
+<% title "Agent" %>
+
+<br />
+
+<%= link_to "Back", @agent %>
+<br /><br />
+
+<table>
+  <tr>
+    <td>
+      <p> <strong>Code : </strong><%= link_to @agent.code, @agent %></p>
+    </td>
+    <td>
+      <p><strong>Fullname : </strong> <%=h @agent.fullname %></p>
+    </td>
+  <td>
+      <p><strong>Upline: </strong> <%=h @agent.upline_status %></p>
+    </td>
+  </tr>
+</table>
+
+<br />
+
+<fieldset>
+  <legend>View Type</legend>
+  <table>
+    <tr>
+      <td><%= link_to "Table", show_downlines_agent_path(@agent, :level_id => 0) %> | </td>
+      <td><%= link_to "Hierarchy", show_hierarchy_agent_path(@agent, :search_agent_id => @agent.id)  %> | </td>
+      <td><%= link_to "Tree", show_tree_agent_path(@agent)  %> </td>
+    </tr>
+  </table>
+
+</fieldset>
+
+<br />
+
+<fieldset>
+  <legend>Downlines</legend>
+  <table>
+    <tr>
+      <td><%= link_to "Rookie", show_downlines_agent_path(@agent, :level_id => 0) %> | </td>
+      <td><%= link_to "Recruiter", show_downlines_agent_path(@agent, :level_id => 1)  %> | </td>
+      <td><%= link_to "Senior Recruiter", show_downlines_agent_path(@agent, :level_id => 2)  %> | </td>
+      <td><%= link_to "Assistant Chief Recruiter", show_downlines_agent_path(@agent, :level_id => 3)  %> | </td>
+      <td><%= link_to "Chief Recruiter", show_downlines_agent_path(@agent, :level_id => 4)  %> | </td>
+      <!--<td><% link_to "Recruiter", show_downlines_agent_path(@agent, :level_id => 5)  %> | </td>
+	  <td><% link_to "Officer", show_downlines_agent_path(@agent, :level_id => 6)  %> </td>-->
+    </tr>
+  </table>
+  
+</fieldset>
+
+<br />
+
+<div id="downlines_area">
+
+ <%= render :partial => "/agents/downlines_area" %>
+  
+</div>
+
+

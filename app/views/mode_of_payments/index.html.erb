@@ -1,0 +1,33 @@
+<% title "Mode Of Payments" %>
+
+<br />
+
+ <%=  link_to 'New', new_mode_of_payment_path %> |
+ <%= link_to "Back to Menu", :controller => "member_area", :action => "base_setup" %>
+<br />
+<br />
+
+<table class="list">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Factor Month</th>
+    <th>Description</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% for mode_of_payment in @mode_of_payments %>
+    <tr class="<%= cycle "odd", "even"  %> ">
+      <td><%=h mode_of_payment.name %></td>
+      <td style="text-align: center"><%=h mode_of_payment.factor_month %></td>
+      <td><%=h mode_of_payment.description %></td>
+      <td style="text-align: center"><%= link_to "Show", mode_of_payment %> |
+      <%= link_to "Edit", edit_mode_of_payment_path(mode_of_payment) %> |
+      <%= link_to "Destroy", mode_of_payment, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+    </tbody>
+</table>
+

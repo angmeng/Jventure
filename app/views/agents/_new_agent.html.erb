@@ -1,0 +1,199 @@
+<% form_tag create_proposal_agents_path, :method => :post do  %>
+  <%= error_messages_for :agent %>
+  <%= error_messages_for :proposal %>
+   <%= hidden_field :agent, :upline_id, :value => session[:proposal_agent_id] %>
+   <%= hidden_field :proposal, :agent_id, :value => session[:proposal_agent_id] %>
+ <p>
+    <%= label :proposal, :proposal_number %><br />
+    <%= text_field :proposal, :proposal_number %>
+  </p>
+
+
+  <p>
+    <%= label :agent, :fullname %><br />
+    <%= text_field :agent, :fullname, :maxlength => 100, :size => 45 %>
+  </p>
+  <p>
+    <%= label :agent, :new_ic_number %><br />
+    <%= text_field :agent, :new_ic_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= label :agent, :old_ic_number %><br />
+    <%= text_field :agent, :old_ic_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= label :agent, :birth_certificate %><br />
+    <%= text_field :agent, :birth_certificate, :maxlength => 20 %>
+  </p>
+  <p>
+    <%= label :agent, :passport %><br />
+    <%= text_field :agent, :passport, :maxlength => 20 %>
+  </p>
+  <p>
+    <%= label :agent, :date_of_birth %><br />
+    <%= date_select :agent, :date_of_birth, :start_year => 1930, :end_year => Time.now.year %>
+  </p>
+  <p>
+    <%= label :agent, :age %><br />
+    <%= text_field :agent, :age, :maxlength => 2, :size => 5 %>
+  </p>
+  <p>
+    <%= label :agent, :resident_address %><br />
+    <%= text_area :agent, :resident_address, :size => "60x8" %>
+  </p>
+  <p>
+    <%= label :agent, :residence_postcode %><br />
+    <%= text_field :agent, :residence_postcode, :maxlength => 5 %>
+  </p>
+  <p>
+    <%= label :agent, :residence_city %><br />
+    <%= text_field :agent, :residence_city, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= label :agent, :residence_state %><br />
+    <%= text_field :agent, :residence_state, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= label :agent, :residence_phone_number %><br />
+    <%= text_field :agent, :residence_phone_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= label :agent, :mobile_number %><br />
+    <%= text_field :agent, :mobile_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= label :agent, :company_name %><br />
+    <%= text_field :agent, :company_name, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= label :agent, :company_address %><br />
+    <%= text_area :agent, :company_address, :size => "60x8"  %>
+  </p>
+  <p>
+    <%= label :agent, :company_postcode %><br />
+    <%= text_field :agent, :company_postcode, :maxlength => 5 %>
+  </p>
+  <p>
+    <%= label :agent, :company_city %><br />
+    <%= text_field :agent, :company_city, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= label :agent, :company_state %><br />
+    <%= text_field :agent, :company_state, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= label :agent, :company_phone_number %><br />
+    <%= text_field :agent, :company_phone_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= label :agent, :email %><br />
+    <%= text_field :agent, :email %>
+  </p>
+  <br />
+  <p>
+    <%= label :agent, :gender %><br />
+    <%= radio_button :agent, :gender, "Male" %>Male
+    <%= radio_button :agent, :gender, "Female" %>Female
+  </p>
+  <br />
+  <p>
+    <%= label :agent, :nationality_id %><br />
+    <%= select :agent, :nationality_id, Nationality.all.map {|n| [n.name, n.id]}, {:include_blank => true} %>
+  </p>
+  <br />
+  <p>
+    <%= label :agent, :marital_status %><br />
+    <%= radio_button :agent, :marital_status, "Married" %> Married
+    <%= radio_button :agent, :marital_status, "Single" %> Single
+    <%= radio_button :agent, :marital_status, "Widowed" %> Widowed
+    <%= radio_button :agent, :marital_status, "Divorced" %> Divorced
+  </p>
+  <br />
+  <p>
+    <%= label :agent, :race_id %><br />
+    <%= select :agent, :race_id, Race.all.map {|r| [r.name, r.id]}, {:include_blank => true} %>
+  </p>
+  <p>
+    <%= label :agent, :religion_id %><br />
+    <%= select :agent, :religion_id, Religion.all.map {|r| [r.name, r.id]}, {:include_blank => true} %>
+  </p>
+  <p>
+    <%= label :agent, :nature_of_business %><br />
+    <%= text_field :agent, :nature_of_business, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= label :agent, :annual_income %><br />
+    <%= text_field :agent, :annual_income, :maxlength => 12, :size => 20 %>
+  </p>
+
+   <p>
+    <%= label :proposal, :mode_of_payment_id %><br />
+    <%= select :proposal, :mode_of_payment_id, ModeOfPayment.all(:order => "name").map {|c| [c.name, c.id]}, {:include_blank => true} %>
+  </p>
+  <p>
+    <%= label :proposal, :payment_method_id %><br />
+    <%= select :proposal, :payment_method_id, PaymentMethod.all(:order => "name").map {|d| [d.name, d.id]}, {:include_blank => true} %>
+  </p>
+
+  <br />
+  <p>
+  <%= check_box :proposal, :is_backdate %> &nbsp; Backdate?
+  </p>
+  <p>
+    <%= label :proposal, :backdate %><br />
+    <%= date_select :proposal, :backdate %>
+  </p>
+  <br />
+  <table>
+    <tr>
+      <td>
+        <p><%= label :proposal, :plan %><br />
+           <%= text_field :proposal, :plan %></p>
+      </td>
+      <td>
+         <p><%= label :proposal, :sum_assured %><br />
+           <%= text_field :proposal, :sum_assured %></p>
+      </td>
+      <td>
+          <p><%= label :proposal, :policy_term %><br />
+             <%= text_field :proposal, :policy_term %></p>
+      </td>
+      <td>
+         <p> <%= label :proposal, :premium_term %><br />
+             <%= text_field :proposal, :premium_term %>
+         </p>
+      </td>
+      <td>
+          <p><%= label :proposal, :modal_premium %><br />
+             <%= text_field :proposal, :modal_premium %></p>
+      </td>
+    </tr>
+    <tr>
+       <td>
+        <p><%= label :proposal, :supplementary_benefit %><br />
+           <%= text_field :proposal, :supplementary_benefit %></p>
+      </td>
+      <td>
+         <p><%= label :proposal, :sb_sum_assured %><br />
+           <%= text_field :proposal, :sb_sum_assured %></p>
+      </td>
+      <td>
+          <p><%= label :proposal, :sb_policy_term %><br />
+             <%= text_field :proposal, :sb_policy_term %></p>
+      </td>
+      <td>
+         <p> <%= label :proposal, :sb_premium_term %><br />
+             <%= text_field :proposal, :sb_premium_term %>
+         </p>
+      </td>
+      <td>
+          <p><%= label :proposal, :sb_modal_premium %><br />
+             <%= text_field :proposal, :sb_modal_premium %></p>
+      </td>
+    </tr>
+  </table>
+   
+  
+  <p><%= submit_tag "Submit" %></p>
+<% end %>
+

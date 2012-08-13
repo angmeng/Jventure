@@ -1,0 +1,20 @@
+      <div id='welcome'>
+        Welcome, <%= current_user.fullname %>
+       
+        <%= link_to "Profile", current_user  %> |
+        <%= link_to "Logout", logout_url %>
+        <!--<div id='jumpbox'>
+          <a class="" href="#">Campaigns</a> | 
+          <a class="" href="#">Accounts</a> |
+          <a class="selected" href="#">Leads</a> |
+          <a class="" href="#">Contacts</a> |
+          <a class="" href="#">Opportunities</a>
+          <br>
+            <input autocomplete="off" id="auto_complete_query" name="auto_complete_query" style="width: 310px" type="text" />
+            <div class='auto_complete' id='auto_complete_dropdown'></div>
+          </br>
+        </div>-->
+      </div>
+      <h3>
+        <%= image_tag("company_logo.png", :size => "830x80") %>
+      </h3>

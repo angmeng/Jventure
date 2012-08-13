@@ -1,0 +1,39 @@
+<% title "Listing services_chargers" %>
+<br />
+<%= link_to 'New services_charger', new_services_charger_path %>
+<br /><br />
+<table class="list">
+  <thead>
+  <tr>
+    <th style="text-align: left">Entry title</th>
+    <th style="text-align: left">Entry description</th>
+    <th style="text-align: left">Renewal title</th>
+    <th style="text-align: left">Renewal description</th>
+    <th>Entry amount</th>
+    <th>Renewal amount</th>
+    <th style="width:80px">Start from</th>
+    <th style="width:80px">End date</th>
+    <th style="width:150px">Action</th>
+  </tr>
+</thead>
+   <tbody>
+<% @services_chargers.each do |services_charger| %>
+   <tr class="<%= cycle "odd", "even"  %>">
+    <td><%=h services_charger.entry_title %></td>
+    <td><%=h services_charger.entry_description %></td>
+    <td><%=h services_charger.renewal_title %></td>
+    <td><%=h services_charger.renewal_description %></td>
+    <td style="text-align: center"><%=h services_charger.entry_amount %></td>
+    <td style="text-align: center"><%=h services_charger.renewal_amount %></td>
+    <td style="text-align: center"><%=h services_charger.start_from %></td>
+    <td style="text-align: center"><%=h services_charger.end_date %></td>
+    <td style="text-align: center"><%= link_to 'Show', services_charger %> |
+    <%= link_to 'Edit', edit_services_charger_path(services_charger) %> |
+    <%= link_to 'Destroy', services_charger, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+   </tbody>
+</table>
+
+<br />
+

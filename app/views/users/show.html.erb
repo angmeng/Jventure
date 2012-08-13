@@ -1,0 +1,33 @@
+<% title "User" %>
+<br />
+<p>
+  <%= link_to "Edit", edit_user_path(@user) %> |
+  <%=  link_to "Change Password", change_password_user_path(@user)%> 
+
+  <% unless @user.is_himself?(current_id) %>
+   | <%= link_to "Destroy", @user, :confirm => 'Are you sure?', :method => :delete %>
+  <% end %>
+
+
+</p>
+<br />
+
+<p>
+  <strong>Full Name:</strong>
+  <%=h @user.fullname %>
+</p>
+
+<p>
+  <strong>User Name:</strong>
+  <%=h @user.username %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%=h @user.email %>
+</p>
+
+
+<br />
+
+

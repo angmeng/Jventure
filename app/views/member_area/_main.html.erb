@@ -1,0 +1,39 @@
+ <table cellpadding='0' cellspacing='0' class='tabbed' height='100%' width='100%'>
+      <tr>
+        <td class='sidebar' id='sidebar' valign='top'>
+
+          <br />
+          <div class='panel' id='recently'>
+            <% if action_name == "base_setup" %>
+              <h4>
+               <%= link_to "Mode of Payment", mode_of_payments_url %> <br />
+               <%= link_to "Payment Method", payment_methods_url %> <br />
+              </h4>
+            <% else %>
+              <h4>
+               <%= link_to "View All", :action => 'index' %> <br />
+              </h4>
+            <% end %>
+
+          </div>
+        </td>
+
+        <td class='main' id='main' valign='top'>
+          <div style='float:left;margin-left:20px;width:80%;'>
+            
+	         <% flash.each do |name, msg| %>
+	           <%= content_tag :p, msg, :class => "flash_#{name}" %>
+	         <% end  %>
+         
+        </div>
+
+
+         <% if show_title? %>
+          <div class='title' id='title' style="clear: both;padding-top: 10px"> <%= yield(:title) %> </div>
+         <%  end %>
+
+           <%= yield :body %>
+
+       </td>
+      </tr>
+    </table>

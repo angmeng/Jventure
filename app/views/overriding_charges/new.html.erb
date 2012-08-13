@@ -1,0 +1,32 @@
+<% title "New overriding_charge" %>
+
+<%= link_to 'Back', overriding_charges_path %>
+<br />
+
+<% form_for(@overriding_charge) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :agent_id %><br />
+    <%= f.text_field :agent_id %>
+  </p>
+  <p>
+    <%= f.label :charger_date %><br />
+    <%= f.date_select :charger_date %>
+  </p>
+  <p>
+    <%= f.label :charger_year %><br />
+    <%= f.text_field :charger_year %>
+  </p>
+  <p>
+    <%= f.label :miscellaneous_item_id %><br />
+    <%= f.text_field :miscellaneous_item_id %>
+  </p>
+  <p>
+    <%= f.label :remark %><br />
+    <%= f.text_field :remark %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>Consumer enquiry</title>
+
+</head>
+
+<body>
+<table>
+<tr>
+  <td style="height: 19px" colspan="3" valign="top"><span style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-size: 16px;">Customer enquiry</span></td>
+</tr>
+
+</table>
+<br /><br />
+<!----   reservation details start here ---ABBY --->
+<table style="font-family:Arial, Lucida-Grande, Sans-Serif;font-size: 12px;margin-left: 25px;margin-right:25px;width:80%;text-align:left;border :1px solid;border-color: #79bedb;" width="1024" border="0">
+<tr>
+  <td colspan="2"><p style="font-size:14px;text-align: center" /><b>Enquiry Info</b></td></tr>
+  <tr>
+    <td><p style="font-size:12px;" />
+   
+    </td></tr>
+
+  <tr><td>
+
+      <table style="width:100%;border:none;">
+        <tr>
+          <td style="width:30%;">
+            Name : <%= @guest_name %><br />
+            Email address :  <%=  @guest_email %><br/>
+            Mobile : <%= @guest_mobile %>
+          </td></tr>
+
+      </table>
+
+  </td></tr>
+
+  <tr><td>
+
+      <table style="font-family:Arial, LucidaGrande, Sans-Serif;font-size: 12px;margin-left: 1px;margin-right: 1px;width: 100%;background: #79bedb;">
+        <tr>
+          <td><p style="font-size:14px" />
+            Message : <%= @content %>
+            <br /><br />
+            </td>
+        </tr>
+      </table>
+  </td></tr>
+
+<!-- end table --></table>
+
+</body>
+</html>
+
+

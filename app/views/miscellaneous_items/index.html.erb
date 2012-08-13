@@ -1,0 +1,79 @@
+<%= render "/shared/select_all_function" %>
+
+<% title "Listing miscellaneous" %>
+<br />
+<%= link_to 'New miscellaneous', new_miscellaneous_item_path %>
+<br /><br />
+
+
+  <fieldset style="background-color: #EDDA74;">
+    <legend>
+      </legend>
+    <% form_for @search do |f| %>
+<table>
+  <tr>
+    <th>From</th>
+    <th>To</th>
+    <th>Agent</th>
+    <th>Built by system</th>
+    <th>Action</th>
+  </tr>
+
+  <tr>
+    <td><%= calendar_date_select_tag "from", params[:from] %> </td>
+    <td><%= calendar_date_select_tag "to", params[:to] %></td>
+    <td><%= text_field_with_auto_complete :option, :agent_name, {:size => 50}, { :url => show_agent_proposals_path, :method => :get, :with => "'search='+element.value" } %></td>
+    <td align="center"><%= f.check_box :builtin_equals  %> </td>
+    <td><%= f.submit "Search"  %> </td>
+  </tr>
+</table>
+<% end %>
+  </fieldset>
+  
+  <br /><br />
+
+<% form_tag remove_items_miscellaneous_items_path do %>
+<% paginated_section @miscellaneous_items do %>
+<br /><br />
+<table class="list">
+  <thead>
+  <tr>
+    <th>All <br /><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
+    <th>Transaction date</th>
+    <th>Agent</th>
+    <th>Title</th>
+    <th>Amount</th>
+    <th>Built by System?</th>
+    <th>Overriding Charger?</th>
+    <th>Action</th>
+  </tr>
+</thead>
+
+  <tbody>
+  	
+<% @miscellaneous_items.each do |miscellaneous_item| %>
+  <tr>
+    <td style="text-align: center"><%= check_box_tag "item[#{miscellaneous_item.id.to_s}][selected]" %></td>
+    <td style="text-align: center"><%=h miscellaneous_item.transaction_date %></td>
+	<td><%=h miscellaneous_item.agent.screen_name %></td>
+    <td><%=h miscellaneous_item.title %></td>
+    <td style="text-align: right"><%=h number_to_currency(miscellaneous_item.amount) %></td>
+    <td style="text-align: center"><%= miscellaneous_item.builtin  %> </td>
+    <td style="text-align: center"><%= miscellaneous_item.overriding_charger  %> </td>
+    <td style="text-align: center"><%= link_to 'Show', miscellaneous_item %> |
+    <%= link_to 'Edit', edit_miscellaneous_item_path(miscellaneous_item) %> |
+    <%= link_to 'Destroy', miscellaneous_item, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+  <tr>
+    <td align="center"><%= submit_tag("Remove Selected", :confirm => "Are you sure ?", :disable_with => "Please wait until you get informed...") unless @miscellaneous_items.empty?  %> </td>
+    <td colspan="6"></td>
+  </tr>
+ </tbody>
+</table>
+  <% end %>
+  <% end %>
+   <br />
+  <%= page_entries_info @miscellaneous_items, :entry_name => 'miscellaneous' %>
+<br />
+

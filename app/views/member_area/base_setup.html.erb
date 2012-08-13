@@ -1,0 +1,23 @@
+<%  title "Base" %>
+<br />
+<p>Select the menu below to setup the base configuration</p>
+<br />
+  <% if action_name == "base_setup" %>
+      <h4>
+            <%= link_to "Services Charge", services_chargers_url %><br />
+           <%= link_to "Mode of Payment", mode_of_payments_url %><br />
+           <%= link_to "Payment Method", payment_methods_url %><br />
+           <%= link_to "Payment Fee", payment_fees_url %><br />
+           <a href="/plans" class="">Plan</a><br />
+           <a href="/credit_points" class="">Agent Credit</a><br />
+           <a href="/users" class="">Admin</a><br />
+           <%= link_to "Commission Day", commission_days_url %><br />
+           <%= link_to "Setting", settings_url %><br />
+           <%= link_to "Import Approval", approvals_url %><br />
+           <%= link_to "Check Qualification", agent_info_proposals_path %><br />
+      </h4>
+    <% else %>
+      <h4>
+       <%= link_to "View All", :action => 'index' %> <br />
+      </h4>
+  <% end %>

@@ -1,0 +1,51 @@
+<h2>Supplementary Scheme</h2>
+<table class="list" style="width:50%">
+  <thead>
+  <tr>
+    <th>Term</th>
+    <th>Policy year</th>
+    <th>Percentage</th>
+	<th>Action</th>
+  </tr>
+
+  </thead>
+
+  <tbody>
+
+<% @plan.sub_commissions.each do |sub_commission| %>
+   <tr class="<%= cycle "odd", "even"  %>" style="text-align: center">
+    <td><%=h sub_commission.term %></td>
+    <td><%=h sub_commission.policy_year %></td>
+    <td><%=h sub_commission.percentage %></td>
+	<td><% link_to "Edit", edit_sub_commission_path(sub_commission) %>
+	    <%= link_to_remote("Remove", :url => {:controller => "sub_commissions", :action => "destroy", :id => sub_commission}, :method => :delete, :confirm => "Are you sure?") %>
+	</td>
+
+  </tr>
+<% end %>
+   </tbody>
+</table>
+
+<br />
+<br />
+
+<% form_remote_tag :url => {:action => "submit_supplementary", :id => @plan} do %>
+    <%= error_messages_for "supplementary" %>
+  <p>
+    Term<br />
+    <%= text_field "supplementary", "term" %>
+  </p>
+  <p>
+    Year<br />
+    <%= text_field "supplementary", "policy_year" %>
+  </p>
+  <p>
+    Commission Percentage<br />
+    <%= text_field "supplementary", "percentage" %>
+  </p>
+  <p><%= submit_tag "Add Supplementary", {:disable_with => "Please wait ..."} %></p>
+
+<% end %>
+
+
+

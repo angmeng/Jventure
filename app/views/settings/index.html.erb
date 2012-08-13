@@ -1,0 +1,37 @@
+<% title "Setting" %>
+<br />
+
+ <%= link_to "Back to Menu", :controller => "member_area", :action => "base_setup" %>
+<br />
+<br />
+<% form_for(@setting) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :admin_email, "Administrator Email address" %><br />
+    <%= f.text_field :admin_email %>
+  </p>
+  <br />
+  <p>
+    <%= f.label :agent_open_registration_level, "Open Registration Level" %><br />
+    <%= f.select :agent_open_registration_level, [["Disable", Setting::DISABLE], ["Direct Downline Only", Setting::DIRECT_ONLY], ["Open", Setting::OPEN]] %>
+  </p>
+  <br />
+    <p>
+  <%= f.check_box :block_registration %>
+  <%= f.label :block_registration %><br />
+
+  </p>
+  <br />
+   <p>
+  <%= f.check_box :agent_code_follow_proposal %>
+  <%= f.label :agent_code_follow_proposal %><br />
+
+  </p>
+  <p>
+    <br />
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<br />

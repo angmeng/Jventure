@@ -1,0 +1,22 @@
+  <div id="content">
+          <div>
+
+            <h3>
+              <em><%= @notice.created_at.strftime("%d-%m-%Y %H:%M")  %> </em>
+            <br />
+             <%= @notice.title %>
+            </h3>
+            <p class="p2"></p>
+            <div class="img-box">
+                <p>
+                 <%= @notice.content %>
+                </p>
+
+                <br />
+                <p>
+                  <%= link_to "<< Back", home_url %>
+                </p>
+            </div>
+          </div>
+        </div>
+

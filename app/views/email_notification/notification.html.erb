@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>Thank you for your enquiry</title>
+</head>
+
+<body>
+<table>
+<tr>
+  <td style="height: 19px" colspan="3" valign="top"><span style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;font-size: 16px;">Thank you for your enquiry</span></td>
+</tr>
+
+</table>
+<br /><br />
+<!----   reservation details start here ---ABBY --->
+<table style="font-family:Arial, Lucida-Grande, Sans-Serif;font-size: 12px;margin-left: 25px;margin-right:25px;width:80%;text-align:left;border :1px solid;border-color: #79bedb;" width="1024" border="0">
+<tr>
+  <td colspan="2"><p style="font-size:14px;text-align: center" /><b>Enquiry Info</b></td></tr>
+  <tr>
+    <td><p style="font-size:12px;" />
+    Your enquiry has been sent to our customer service and we will contact you as soon as possible.
+    </td></tr>
+ 
+  <tr><td>
+
+      <table style="width:100%;border:none;">
+        <tr>
+
+          <td style="width:30%;">
+            Your Name : <%= @guest_name %><br />
+            Your Email :  <%=  @guest_email %><br/>
+            Your Mobile : <%= @guest_mobile %>
+          </td></tr>
+
+      </table>
+
+  </td></tr>
+
+  <tr><td>
+
+      <table style="font-family:Arial, LucidaGrande, Sans-Serif;font-size: 12px;margin-left: 1px;margin-right: 1px;width: 100%;background: #79bedb;">
+        <tr>
+          <td><p style="font-size:14px" />
+            Your Message : <%= @content %>
+            <br /><br />
+            </td>
+        </tr>
+      </table>
+  </td></tr>
+ 
+<!-- end table --></table>
+
+</body>
+</html>
+
+

@@ -1,0 +1,10 @@
+<% content_for :body do %>
+
+  <% title "New Proposer" %>
+
+<%= render :partial => 'form' %>
+
+<p><%= link_to "Back to List", proposers_path %></p>
+
+<% end %>
+<%= render :partial => '/proposers/main'   %>

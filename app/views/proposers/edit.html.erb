@@ -1,0 +1,13 @@
+<% content_for :body do %>
+
+<% title "Edit Proposer" %>
+
+<%= render :partial => 'form' %>
+
+<p>
+  <%= link_to "Show", @proposer %> |
+  <%= link_to "View All", proposers_path %>
+</p>
+
+<% end %>
+<%= render :partial => '/proposers/main'   %>

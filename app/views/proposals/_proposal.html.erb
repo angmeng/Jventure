@@ -1,0 +1,171 @@
+
+
+
+<table style="width: 90%;">
+  <tr>
+    <td style="width: 200px">
+      
+  <strong>Life assured:</strong>
+    </td>
+    <td>
+        <%=h investor.fullname %> &nbsp &nbsp
+        <% if is_admin? and investor.has_proposer? and investor.proposer_is_agent? %>
+          <%= link_to "Convert life assured to agent", convert_life_assured_proposal_path(investor) %>
+        <% end %>
+    </td>
+  </tr>
+
+
+  <tr>
+    <td>
+        <strong>Code:</strong>
+    </td>
+    <td>
+        <%=h investor.investor.code %> 
+    </td>
+  </tr>
+
+
+  <tr>
+    <td>
+           <strong>Fullname:</strong>
+
+    </td>
+    <td>
+           <%=h investor.fullname %>
+    </td>
+  </tr>
+
+
+  <tr>
+    <td>
+          <strong>New Ic Number:</strong>
+
+    </td>
+    <td>
+           <%=h investor.new_ic_number %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+           <strong>Old Ic Number:</strong>
+
+    </td>
+    <td>
+         <%=h investor.old_ic_number %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+         <strong>Birth Certificate:</strong>
+
+    </td>
+    <td>
+           <%=h investor.birth_certificate %>
+    </td>
+  </tr>
+
+
+  <tr>
+    <td>
+       <strong>Passport:</strong>
+
+    </td>
+    <td>
+         <%=h investor.passport %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        <strong>Date Of Birth:</strong>
+
+    </td>
+    <td>
+         <%=h investor.date_of_birth %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        <strong>Age:</strong>
+
+    </td>
+    <td>
+       <%=h investor.age %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        <strong>Resident Address:</strong>
+
+    </td>
+    <td>
+      <%=h investor.resident_address %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        <strong>Residence Postcode:</strong>
+
+    </td>
+    <td>
+       <%=h investor.residence_postcode %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        <strong>Residence City:</strong>
+
+    </td>
+    <td>
+       <%=h investor.residence_city %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+       <strong>Residence State:</strong>
+
+    </td>
+    <td>
+      <%=h investor.residence_state %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        <strong>Residence Phone Number:</strong>
+
+    </td>
+    <td>
+      <%=h investor.residence_phone_number %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        <strong>Mobile Number:</strong>
+
+    </td>
+    <td>
+        <%=h investor.mobile_number %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+        <strong>Email:</strong>
+
+    </td>
+    <td>
+        <%=h investor.email %>
+    </td>
+  </tr>
+
+</table>

@@ -1,0 +1,42 @@
+
+<% title "Editing board_notice" %>
+<br />
+<%= link_to 'Show', @board_notice %> |
+<%= link_to 'Back', board_notices_path %>
+<br /><br />
+
+
+<% form_for(@board_notice) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title, :size => 80 %>
+  </p>
+  <br /><br />
+  <p>
+    <%= f.label :content %><br />
+    <%= f.text_area :content, :size => "180x36", :class => "mceEditor" %>
+  </p>
+
+<table>
+    <tr>
+      <td> <p>
+    <%= f.label :public %><br />
+    <%= f.check_box :public %>
+  </p></td>
+      <td> <p>
+    <%= f.label :suspend %><br />
+    <%= f.check_box :suspend %>
+  </p></td>
+    </tr>
+  </table>
+  
+ 
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+
+

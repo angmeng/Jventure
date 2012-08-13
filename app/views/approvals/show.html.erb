@@ -1,0 +1,25 @@
+
+<br /><br />
+<%= link_to 'Back', approvals_path %> |
+<%= link_to 'Import CSV', import_csv_approval_path(@approval), :confirm => "Are you sure?" %>
+<br />
+<br />
+<p>
+  <b>Import date:</b>
+  <%=h @approval.approval_date %>
+</p>
+
+<p>
+	<strong>
+		CSV Filename :
+	</strong>
+	<%= link_to @approval.document_file_name, @approval.document.url %>
+	</p>
+
+
+<p>
+  <b>Description:</b><br />
+  <%= @approval.description %>
+</p>
+
+

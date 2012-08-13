@@ -1,0 +1,50 @@
+<% title "Agent qualification info" %>
+<br />
+<%= link_to "Back", agent_info_proposals_path %>
+<br /><br />
+<table class="list">
+  <tr>
+    <th>Check Date</th>
+    <th>Agent Code</th>
+    <th>Fullname</th>
+    <th>Referer</th>
+    <th>Policy No</th>
+    <th>Expired on check date</th>
+  </tr>
+   <tr>
+      <td align="center"><%= @check_date %> </td>
+    <td align="center"><%= @agent.screen_name %> </td>
+    <td align="center"><%= @agent.fullname %> </td>
+    <td align="center"><%= @agent.upline_name %> </td>
+    <td align="center"><%= @agent.own_proposal.policy_number rescue "-" %> </td>
+    <td align="center"><%= @agent.own_proposal.check_qualification(@check_date) ? "No" : "Yes" rescue "This agent dont have any policy" %> </td>
+  </tr>
+</table>
+<br /><br />
+<h3>Downlines Info</h3>
+<table class="list">
+  <tr>
+    <th align="left">Policy No</th>
+    <th align="left">Code</th>
+    <th align="left">Fullname</th>
+    <th align="left">Modal Premium</th>
+    <th align="left">Supplementary Premium</th>
+    <th>Expired on check date</th>
+  </tr>
+  <% total = 0 %>
+  <% @downlines.each do |c| %>
+  <% agent = c.investor %>
+  <% total += c.modal_premium %>
+  <tr>
+    <td><%= c.policy_number  %> </td>
+    <td><%= agent.screen_name  %> </td>
+    <td><%= agent.fullname  %> </td>
+    <td><%= c.modal_premium  %> </td>
+    <td><%= c.sb_modal_premium  %> </td>
+     <td align="center"><%= c.check_qualification(@check_date) ? "No" : "Yes"  %> </td>
+  </tr>
+
+  <% end %>
+</table>
+<br /><br />
+<h3>Total Premium : <%= total %> </h3>

@@ -1,0 +1,62 @@
+<%  title "Lastest News" %>
+<br />
+<br />
+<%  if @expiry and @expiry.size.to_i > 0 %>
+<div style="background: #EDE275;padding: 10px 10px 10px 10px;margin: 2px 2px 2px 2px;">
+  <em></em>
+  <h4>Renewal Reminder</h4><br />
+  <table class="list">
+    <tr>
+      <th align="left">Name</th>
+      <th align="left">Policy No</th>
+      <th align="left">Referer</th>
+      <th align="left">Plan</th>
+      <th>Expired Date</th>
+      <th>Premium</th>
+    </tr>
+    <% @expiry.each do |e| %>
+    <tr>
+      <td><%= e.agent.screen_name %></td>
+      <td><%= e.proposal.policy_number %></td>
+      <td><%= e.agent.upline_name %></td>
+      <td><%= e.proposal.plan.name %></td>
+      <td align="center"><%= e.proposal.expiry_date %></td>
+      <td align="center"><%= e.proposal.modal_premium %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+<% end %>
+<br /><br />
+<% for news in @notices %>
+<div style="background: #EDE275;padding: 10px 10px 10px 10px;margin: 2px 2px 2px 2px;">
+  <em><%= news.created_at.strftime("%d-%m-%Y %H:%M")  %> </em>
+  <h4>
+    <%= news.title %>
+  </h4>
+  
+  <br />
+
+  <table>
+    <tr>
+      <td>
+      
+       <%= news.content %>
+      
+      </td>
+    </tr>
+  </table>
+</div>
+<br />
+<br />
+<% end %>
+
+
+<%= will_paginate @notices %>
+
+
+
+   
+
+
+

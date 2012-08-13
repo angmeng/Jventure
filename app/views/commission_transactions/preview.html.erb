@@ -1,0 +1,219 @@
+<style type="text/css">
+   body {font-family:verdana, tahoma, sans-serif;font-size: 0.8em;}
+   h3 {font-family:verdana, tahoma, sans-serif;font-size: 1.0em;}
+   table td {font-family:verdana, tahoma, sans-serif;font-size: 0.8em;}
+   table th {font-family:verdana, tahoma, sans-serif;font-size: 0.8em;font-weight: bold;}
+</style>
+
+<table style="width:100%">
+  <tr>
+    <td style="text-align:center">
+      <%= image_tag("company_logo.png") %>
+      <h3>How K'ng Ventures Sdn Bhd (879620-X)</h3>
+      29B (2nd Floor), Rangoon Road 10400 Penang
+      </td>
+     <td></td>
+  </tr>
+</table>
+
+<hr />
+
+
+<table style="width:100%">
+  <tr>
+    <td style="width:40%">
+        <table style="width:100%">
+          <tr>
+            <td style="width:10%">Name:  </td>
+            <td><%= @agent.fullname + " " + @agent.new_ic_number  %>
+            </td>
+          </tr>
+
+           <tr>
+            <td style="width:10%">Code:  </td>
+            <td><%= @agent.code %></td>
+          </tr>
+
+
+        </table>
+    </td>
+
+    <td style="width:40%">
+      <table style="width:100%">
+          <tr>
+            <td style="width:20%">Bank:  </td>
+            <td><%= @agent.account_bank %>
+            </td>
+          </tr>
+
+           <tr>
+            <td style="width:20%">Account:  </td>
+            <td valign="bottom"><%= @agent.account_number %>
+            </td>
+          </tr>
+
+
+        </table>
+    </td>
+     
+    <td>
+      <h3>Remuneration Statement <br/> <%= session[:from] %> to <%= session[:to] %>  </h3>
+    </td>
+  </tr>
+</table>
+
+<br />
+<hr />
+
+<h4>Standard</h4>
+<table style="width:100%">
+  <tr>
+    <th>Policy No</th>
+    <th>Life Assured</th>
+   
+    <th>Commence Date</th>
+    <th>Premium Term</th>
+    <th>Policy Term</th>
+    <th>Sum Assured</th>
+    <th>Modal Premium</th>
+    <th>Level Paid</th>
+    <th>Type</th>
+    <th>Remuneration</th>
+
+  </tr>
+  <% total = 0.0 %>
+  <% for comm in @standard_commissions %>
+  <% total += comm.amount %>
+  <tr>
+    <td align="center"><%= comm.proposal.policy_number  %> </td>
+    <td align="center"><%= comm.proposal.fullname  %> </td>
+    <td align="center"><%= comm.proposal.approval_date  %> </td>
+    <td align="center"><%= comm.proposal.premium_term  %> </td>
+    <td align="center"><%= comm.proposal.policy_term  %> </td>
+    <td align="center">RM <%=  number_with_precision(comm.proposal.sum_assured, :precision => 2)  %> </td>
+    <td align="center">RM <%= number_with_precision(comm.proposal.modal_premium, :precision => 2)  %> </td>
+    <td align="center"><%= comm.level_paid  %> </td>
+    <td align="center"><%= comm.supplementary? ? "Supplementary" : "Plan"  %> </td>
+    <td align="center">RM <%= number_with_precision(comm.amount, :precision => 2)  %> </td>
+  </tr>
+
+  <% end %>
+  
+  <tr>
+    <td colspan="9">
+    </td>
+    <td align="center">
+      <hr />
+      RM <%= number_with_precision(total, :precision => 2) %>
+      <hr />
+    </td>
+  </tr>
+
+
+</table>
+
+<br />
+<br />
+<hr />
+
+<h4>Incentive</h4>
+<table style="width:100%">
+  <tr>
+    <th>Policy No</th>
+    <th>Life Assured</th>
+    <th>Commence Date</th>
+    <th>Agent</th>
+    <th>Sum Assured</th>
+    <th>Modal Premium</th>
+    <th>Level Paid</th>
+    <th>Type</th>
+    <th>Remuneration</th>
+
+  </tr>
+  <% total_overiding = 0.0 %>
+  <% for comm in @overriding_commissions %>
+  <% total_overiding += comm.amount %>
+  <tr>
+    <td align="center"><%= comm.proposal.policy_number  %> </td>
+    <td align="center"><%= comm.proposal.fullname  %> </td>
+    <td align="center"><%= comm.proposal.approval_date  %> </td>
+    <td align="center"><%= comm.proposal.agent.screen_name  %> </td>
+    <td align="center">RM <%=  number_with_precision(comm.proposal.sum_assured, :precision => 2)  %> </td>
+    <td align="center">RM <%= number_with_precision(comm.proposal.modal_premium, :precision => 2)  %> </td>
+    <td align="center"><%= comm.level_paid  %> </td>
+    <td align="center"><%= comm.supplementary? ? "Supplementary" : "Plan"  %> </td>
+    <td align="center">RM <%= number_with_precision(comm.amount, :precision => 2)  %> </td>
+  </tr>
+
+  <% end %>
+  <tr>
+    <td colspan="8">
+    </td>
+    <td align="center">
+      <hr />
+      RM <%= number_with_precision(total_overiding, :precision => 2) %>
+      <hr />
+    </td>
+  </tr>
+
+ </table>
+
+
+<br />
+ <hr />
+ <br />
+ 
+ <h4>Misc</h4>
+<table style="width:100%">
+  <tr>
+    <th>Date</th>
+    <th>Title</th>
+    <th style="width:50%%">Description</th>
+    <th>Amount</th>
+  </tr>
+<% for misc in @miscellaneous %>
+  <% @total += misc.amount  %>
+  <tr>
+  	<td align="center"><%= misc.transaction_date %></td>
+	  <td align="center"><%= misc.title %></td>
+	  <td align="center"><%= misc.description %></td>
+	  <td align="center"><%= number_with_precision(misc.amount, :precision => 2) %></td>
+  </tr>
+  <% end %>
+
+  </table>
+  <br />
+ <hr />
+ <br />
+ 
+  <% if @total %>
+   <table style="width:100%">
+     <tr>
+      <td align="right">
+      <h3>Grand total : RM <%= number_with_precision(@total, :precision => 2) %></h3>
+      </td>
+    </tr>
+  </table>
+<% end %>
+ <br /><br />
+<em>This is a computer generated copy, therefore no signature is required</em>
+ <br /><br />
+ <hr style="height: 0;border-bottom: 2px dotted #000;" />
+ <br />
+
+ <p>
+   I <%= @agent.fullname + " IC/No " + @agent.new_ic_number  %> hereby confirm received Amount RM <%= number_with_precision(@total, :precision => 2) %>
+   for Remuneration from <%= session[:from] %> to <%= session[:to] %>.
+ </p>
+ <br />
+ <br />
+ <br />
+ <br />
+
+
+ ------------------------------------
+ <br />
+ Signature
+
+
+

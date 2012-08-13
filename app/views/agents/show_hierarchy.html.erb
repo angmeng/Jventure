@@ -1,0 +1,81 @@
+<% title "Agent" %>
+
+<br />
+<%= link_to "Back", @agent %>
+<br /><br />
+
+<table>
+  <tr>
+    <td>
+      <p> <strong>Code : </strong><%= link_to @agent.code, @agent %></p>
+    </td>
+    <td>
+      <p><strong>Fullname : </strong> <%=h @agent.fullname %></p>
+    </td>
+	<td>
+      <p><strong>Upline: </strong> <%=h @agent.upline_status %></p>
+    </td>
+  </tr>
+</table>
+
+<br />
+
+<fieldset>
+  <legend>View Type</legend>
+  <table>
+    <tr>
+      <td><%= link_to "Table", show_downlines_agent_path(@agent, :level_id => 0) %> | </td>
+      <td><%= link_to "Hierarchy", show_hierarchy_agent_path(@agent, :search_agent_id => @agent.id)  %> | </td>
+      <td><%= link_to "Tree", show_tree_agent_path(@agent)  %> </td>
+    </tr>
+  </table>
+
+</fieldset>
+
+<br />
+<br />
+<br />
+<fieldset>
+  <legend>My Downlines Hierarchy</legend>
+ 
+  <table style="width:100%">
+    <tr>
+      <td align="center">
+      	<% unless @agent.id == @target.id %>
+          <%= link_to image_tag("up.png", :title => "Up one level"), show_hierarchy_agent_path(@agent, :search_agent_id => @target.upline_id) %><br /><br />
+		<% end %>
+		<%= image_tag("me.jpg") %><br />
+        <%= @target.screen_name %>
+      </td>
+    </tr>
+  </table>
+
+  <br />
+
+  <fieldset id="level0">
+          <legend>Rookie</legend>
+  <table style="width:100%">
+    <% @target.licenses.in_groups_of(6, false) do |row| %>
+    <tr>
+      <% for lc in row %>
+      <td align="center">
+        
+        <%= image_tag("level_0.png", :size => "50x50") %><br />
+        <%= lc.code %><br />
+        <% link_to_remote(lc.fullname, :url => {:action => "show_popup_hierarchy", :id => lc, :level_id => 0}) %>
+        <%= link_to lc.fullname, show_hierarchy_agent_path(@agent, :search_agent_id => lc.id) %>
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+  </fieldset>
+
+    <div id="level00" style="display:none">
+      
+    </div>
+
+  
+</fieldset>
+
+<br />

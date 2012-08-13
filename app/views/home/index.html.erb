@@ -1,0 +1,30 @@
+  <div id="content">
+        <div class="wrapper">
+          <div class="col-1">
+            <h3>News</h3>
+            <ul class="list1 p2">
+
+              <% for notice in @notices %>
+              <li>
+                <h4><a href="/home/notice/<%= notice.id  %>">
+                    <em><%= notice.created_at.strftime("%d-%m-%Y")  %><br />
+                        <%= notice.title %>
+                    </em>
+                  </a></h4>
+
+              <br />
+              </li>
+             <% end %>
+            </ul>
+            <div class="wrapper"><a href="#" class="link1"><em><b>News Archive<span>News Archive</span></b></em></a></div>
+          </div>
+          <div class="col-2">
+            <h3>Welcome!</h3>
+            <p class="p1">HK Ventures Sdn Bhd (Co No:879620-X) was incorporate in Malaysia with the registered address at 29-B, 2nd Floor Rangoon Road 10400 Penang. </p>
+            <p class="p1">HK Ventures Sdn Bhd proudly present to you the latest saving's product which will allow you and your family get FREE policy at the same time you stand a chance to earn extra income with our Recruitment Incentive scheme. For more detail information kindly drop a request through our web site or call 04-2299 279 (Ms Tan) to secure the appointment.</p>
+            <p class="p1"><a href="/home/contact"><img src="/images/join_us.jpg" alt="" align="center" /></a></p>
+            <div class="wrapper"><a href="/home/product" class="link1"><em><b>Read More<span>Read More</span></b></em></a></div>
+          </div>
+
+        </div>
+      </div>

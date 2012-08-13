@@ -1,0 +1,35 @@
+<% title  "Listing payment fees" %>
+
+<br />
+<%= link_to 'New', new_payment_fee_path %> |
+ <%= link_to "Back to Menu", :controller => "member_area", :action => "base_setup" %>
+ <br /><br />
+<table class="list">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Enabled</th>
+    <th>Action</th>
+  </tr>
+   </thead>
+
+  <tbody>
+
+<% @payment_fees.each do |payment_fee| %>
+   <tr class="<%= cycle "odd", "even"  %> ">
+    <td><%=h payment_fee.name %></td>
+    <td><%=h payment_fee.description %></td>
+    <td style="text-align: right"><%=h payment_fee.amount %></td>
+    <td style="text-align: center"><%=h payment_fee.is_enabled %></td>
+    <td style="text-align: center"><%= link_to 'Show', payment_fee %> |
+    <%= link_to 'Edit', edit_payment_fee_path(payment_fee) %> |
+    <%= link_to 'Destroy', payment_fee, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+<br />
+

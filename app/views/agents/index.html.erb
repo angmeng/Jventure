@@ -1,0 +1,63 @@
+<% title "Agents" %>
+
+<br />
+
+<% form_for @search do |f| %>
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Fullname</th>
+    <th>New Ic Number</th>
+     <th>Action</th>
+  </tr>
+
+  <tr>
+    <td><%= f.text_field :code_equals  %> </td>
+    <td><%= f.text_field :fullname_like  %> </td>
+    <td><%= f.text_field :new_ic_number_equals %></td>
+    <td><%= f.submit "Search" %></td>
+
+  </tr>
+
+</table>
+<% end %>
+
+
+<br />
+
+<% paginated_section @agents do %>
+<br /><br />
+<table class="list">
+  <thead>
+    <tr>
+    <th>Code</th>
+    <th>Fullname</th>
+    <th>New Ic Number</th>
+    <th>Upline</th>
+    <th>Action</th>
+  </tr>
+</thead>
+   <tbody>
+  <% for agent in @agents %>
+    <tr class="<%= cycle "odd", "even"  %> " >
+      <td style="text-align: center"><%=h agent.code %></td>
+      <td><%=h agent.fullname %></td>
+      <td><%=h agent.new_ic_number %></td>
+     
+      <td style="text-align: left"><%=h agent.upline_status %></td>
+    
+      <td style="text-align: center">
+      
+	  <%= link_to "Show", agent %> 
+	  <% if is_admin? %>
+	  | <%= link_to "Edit", edit_agent_path(agent) %>
+	  <% end %>
+      </td>
+    </tr>
+  <% end %>
+   </tbody>
+</table>
+  <% end %>
+   <br />
+  <%= page_entries_info @agents, :entry_name => 'agent' %>
+

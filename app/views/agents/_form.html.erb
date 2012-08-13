@@ -1,0 +1,97 @@
+<% form_for @agent do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :fullname %><br />
+    <%= f.text_field :fullname, :maxlength => 100, :size => 45 %>
+  </p>
+  <p>
+    <%= f.label :new_ic_number %><br />
+    <%= f.text_field :new_ic_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :resident_address %><br />
+    <%= f.text_area :resident_address, :size => "60x8" %>
+  </p>
+  <p>
+    <%= f.label :residence_postcode %><br />
+    <%= f.text_field :residence_postcode, :maxlength => 5 %>
+  </p>
+  <p>
+    <%= f.label :residence_city %><br />
+    <%= f.text_field :residence_city, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= f.label :residence_state %><br />
+    <%= f.text_field :residence_state, :maxlength => 45 %>
+  </p>
+  <p>
+    <%= f.label :residence_phone_number %><br />
+    <%= f.text_field :residence_phone_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :mobile_number %><br />
+    <%= f.text_field :mobile_number, :maxlength => 12, :size => 20 %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  
+   <p>
+    <%= f.label :birthday %><br />
+    <%= f.date_select :birthday, :start_year => 1930, :end_year => Time.now.year %>
+  </p>
+
+  <% if is_admin? %>
+   <p>
+    <%= f.label :join_date %><br />
+    <%= f.date_select :join_date %>
+  </p>
+  <% end %>
+
+  <p>
+    <%= f.label :account_bank %><br />
+    <%= f.text_field :account_bank %>
+  </p>
+
+  <p>
+    <%= f.label :account_number %><br />
+    <%= f.text_field :account_number %>
+  </p>
+
+   <!--<p>
+    <% f.label :upline_id %><br />
+    <% f.select :upline_id, Agent.all(:order => "code").map {|ag| [ag.screen_name, ag.id]}, {:include_blank => true} %>
+  </p>-->
+
+  <% if is_admin? %>
+  <p>
+    <%= f.label :upline_id %><br />
+    <%= f.text_field_with_auto_complete :upline_name, {}, { :url => show_upline_agents_path, :method => :get, :skip_style => true, :with => "'search='+element.value" } %>
+  </p>
+  
+  <p><br />
+    <%= f.check_box :master_agent %>  <%= f.label :master_agent %> 
+     <br /><br />
+  </p>
+  
+  <p>
+    <%= f.label :credits %><br />
+    <%= @agent.credits %>
+  </p>
+  
+  <% elsif is_agent? %>
+     <p>
+    <%= f.label :upline_id %><br />
+    <% if @agent.is_himself?(current_id) %>
+      <%= @agent.upline_name_for_agent %>
+    <% else %>
+      <%= f.text_field :upline_name_for_agent %>
+    <% end %>
+  </p>
+  <% end %>
+
+  <br />
+  <p><%= f.submit "Submit" %></p>
+<% end %>

@@ -1,0 +1,31 @@
+<% title "Overriding Charges" %>
+<br />
+ <%=  link_to 'New', new_overriding_charge_path %> |
+ <%= link_to "Back to Menu", :controller => "member_area", :action => "base_setup" %>
+ <br />
+<table class="list">
+  <tr>
+    <th>Agent</th>
+    <th>Charger Date</th>
+    <th>Charger year</th>
+    <th>Misc. Item</th>
+    <th>Remark</th>
+    <th>Action</th>
+  </tr>
+  <% for charger in @overriding_charges %>
+    <tr class="<%= cycle "odd", "even"  %> ">
+      <td><%=h charger.agent.screen_name %></td>
+      <td style="text-align: center"><%=h charger.charger_date %></td>
+      <td style="text-align: center"><%=h charger.charger_year %></td>
+      <td style="text-align: center"><%=h link_to "Show", charger.miscellaneous_item, :target => "_blank" %></td>
+      <td><%=h charger.remark %></td>
+      <td style="text-align: center"><%= link_to "Show", commission %>
+      <%= link_to "Edit", edit_commission_path(commission) %>
+      <%= link_to "Destroy", commission, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+<br />
+
+<%= will_paginate @overriding_charges  %>
+

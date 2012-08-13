@@ -1,0 +1,144 @@
+<% title "Renew Proposal" %>
+<br />
+<%= link_to "All Renewals", proposal_approvals_path %> |
+<%= link_to "Back to Proposal", @proposal %>
+<br /><br />
+
+<table style="width: 90%;">
+  <tr>
+    <td style="width: 200px">
+      <p> <strong>Referer:</strong> </p>
+    </td>
+
+    <td>
+         <%= @proposal.agent.screen_name %>
+    </td>
+  </tr>
+
+   <tr>
+    <td style="width: 200px"><strong>Sharing Agent:</strong></td>
+    <td> <%=h @proposal.shared_agent_status %></td>
+  </tr>
+</table>
+
+<br />
+<hr />
+<br />
+
+<table>
+  <tr>
+    <td style="width: 200px"><strong>Proposal Number:</strong></td>
+    <td> <%=h @proposal.proposal_number %></td>
+  </tr>
+  <tr>
+    <td valign="top">  <strong>Policy Number:</strong></td>
+    <td><%= @proposal.policy_status %>
+	</td>
+  </tr>
+       
+   <tr>
+    <td><strong>Approved Date:</strong></td>
+    <td> <%=h @proposal.approval_date.strftime("%Y-%m-%d") %></td>
+  </tr> 
+  
+   <tr>
+    <td><strong>Expiry:</strong></td>
+    <td> <%=h @proposal.expiry_date %></td>
+  </tr> 
+</table>
+
+  
+
+<table>
+  <tr>
+    <td style="width: 200px"><strong>Mode Of Payment:</strong></td>
+    <td><%=h @proposal.mode_of_payment.name %></td>
+  </tr>
+</table>
+
+
+<table>
+  <tr>
+    <td style="width: 200px"><strong>Plan:</strong>
+    </td>
+    <td>
+         <%=h @proposal.plan_selection %></td>
+    <td>
+      <p> <strong>Sum Assured:</strong>
+      <%=h number_to_currency(@proposal.sum_assured) %></p>
+    </td>
+    <td>
+      <p>  <strong>Policy Term:</strong>
+         <%=h @proposal.policy_term %></p>
+    </td>
+    <td>
+      <p><strong>Premium Term:</strong>
+       <%=h @proposal.premium_term %></p>
+    </td>
+    <td>
+      <p><strong>Modal Premium:</strong>
+        <%=h number_to_currency(@proposal.modal_premium) %></p>
+    </td>
+  </tr>
+
+  <tr>
+    <td><strong>Supplementary Benefit:</strong></td>
+    <td><%=h @proposal.supplementary_benefit %></td>
+    <td>
+      <p> <strong>Premium:</strong>
+      <%=h number_to_currency(@proposal.sb_sum_assured) %></p>
+    </td>
+    <td>
+      <p>  <strong>Policy Term:</strong>
+         <%=h @proposal.sb_policy_term %></p>
+    </td>
+    <td>
+      <p><strong>Premium Term:</strong>
+       <%=h @proposal.sb_premium_term %></p>
+    </td>
+    <td>
+      <p><strong>Modal Premium:</strong>
+        <%=h number_to_currency(@proposal.sb_modal_premium) %></p>
+    </td>
+  </tr>
+</table>
+
+<br />
+<hr/>
+<br/>
+
+ <table>
+    <tr>
+      <td>
+        <div id="submit_form">
+        <% form_tag renew_proposal_approval_path(@proposal) do %>
+           Approval date : <%= calendar_date_select_tag "approval_date" %>
+           Renew to Year : <%= select_tag "renewal_year", options_for_select(1.upto(20).to_a) %>
+           <%= submit_tag "Submit", :disable_with => "Please wait ..."  %>
+         <% end %>
+         </div>
+     </td>
+   </tr>
+ </table>
+ <br /><br />
+ <h3>Renew History</h3>
+ <table class="list" style="width:50%">
+   <tr>
+     <th>No</th>
+     <th>Last Expiry Date</th>
+     <th>Renew Date</th>
+     <th>Next Expiry Date</th>
+     <th>Renew Year</th>
+   </tr>
+   <% count = 0 %>
+   <% @proposal.proposal_approvals.each do |a| %>
+   <% count += 1 %>
+   <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+     <td><%= count.to_s %> </td>
+     <td><%= a.expired_date %></td>
+     <td><%= a.approved_date %></td>
+     <td><%= a.individual_expiry_date %></td>
+     <td><%= a.approval_year %></td>
+   </tr>
+   <% end %>
+ </table>

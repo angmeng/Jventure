@@ -1,0 +1,44 @@
+<% content_for :body do %>
+
+<% title "Proposers" %>
+
+<table class="list">
+  <thead>
+  <tr>
+    <th>Fullname</th>
+    <th>New Ic Number</th>
+    <th>Residence City</th>
+    <th>Residence State</th>
+    <th>Mobile Number</th>
+    <th>Relationship</th>
+    <th>Email</th>
+    <th>Gender</th>
+    <th>Action</th>
+   
+  </tr>
+  </thead>
+
+  <tbody>
+  <% for proposer in @proposers %>
+    <tr class="<%= cycle "odd", "even"  %> ">
+      <td><%=h proposer.fullname %></td>
+      <td><%=h proposer.new_ic_number %></td>
+      <td><%=h proposer.residence_city %></td>
+      <td><%=h proposer.residence_state %></td>
+      <td><%=h proposer.mobile_number %></td>
+      <td><%=h proposer.relationship %></td>
+      <td><%=h proposer.email %></td>
+      <td><%=h proposer.gender %></td>
+   
+      <td style="text-align: center"><%= link_to "Show", proposer %>
+      <%= link_to "Edit", edit_proposer_path(proposer) %>
+      <%= link_to "Destroy", proposer, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+    </tbody>
+</table>
+
+
+
+<% end %>
+<%= render :partial => '/proposers/main'   %>

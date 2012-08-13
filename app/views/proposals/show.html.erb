@@ -1,0 +1,224 @@
+  <% title "Proposal" %>
+
+<br />
+<p>
+  <% if is_admin? %>
+    <%# unless @proposal.approved? %>
+      <%= link_to "Edit", edit_proposal_path(@proposal) %> |
+    <%# end %> 
+     <% unless @proposal.deleted? and @proposal.void? %>
+      <%= link_to "Cancel Policy", cancellation_date_proposal_path(@proposal), {:confirm => "Warning ! Are you sure you want to cancel this proposal ?"} %> |
+     <% end %>
+  <% end %>
+
+     <%= link_to "View All Policy", policy_proposals_path %> |
+     <%= link_to "View All Proposal", proposals_path %>
+    
+</p>
+<br />
+<% if is_admin? %>
+  <div>
+    <%= generate_previous_next_label(@first, @previous, @next, @last) %>
+  </div>
+<br />
+<% end %>
+
+<table style="width: 90%;">
+  <tr>
+    <td style="width: 200px">
+      <p> <strong>Referer:</strong> </p>
+    </td>
+
+    <td>
+       <% if is_admin? %>
+         <%= link_to @proposal.agent.screen_name, @proposal.agent %>
+      <% else %>
+         <%= @proposal.agent.screen_name %>
+       <% end %>
+    </td>
+  </tr>
+
+   <tr>
+    <td style="width: 200px"><strong>Sharing Agent:</strong></td>
+    <td> <%=h @proposal.shared_agent_status %></td>
+  </tr>
+</table>
+
+<br />
+<hr />
+<br />
+
+<table>
+  <tr>
+    <td style="width: 200px"><strong>Proposal Number:</strong></td>
+    <td> <%=h @proposal.proposal_number %></td>
+  </tr>
+  <tr>
+    <td valign="top">  <strong>Policy Number:</strong></td>
+    <td><%= @proposal.policy_status %>
+      <% if is_admin? %>
+       <% if @proposal.approved? %>
+
+            | <%= link_to "Show paid commission", commission_detail_proposal_path(@proposal) %>
+            | <%= link_to "Show Renewal", edit_proposal_approval_path(@proposal) %>
+
+       <% else %>
+            <% unless @proposal.deleted %>
+               <table>
+                 <tr>
+                   <td><%= link_to_function "Get Approval", :onclick => "Element.show('submit_form')" %></td>
+                   <td>
+                     <div id="submit_form" style="display:none">
+                       <% form_tag get_approval_proposal_path(@proposal) do %>
+                         Approval Date : <%= calendar_date_select_tag "approval_date" %>
+                         Policy No : <%= text_field_tag "policy_number",  nil, {:maxlength => 20} %>
+                         <%= submit_tag "Submit", :disable_with => "Please wait ..."  %>
+                       <% end %>
+                     </div>
+                   </td>
+                 </tr>
+
+               </table>
+            <% end %>
+         <% end %>
+      <% end %>
+
+    </td>
+  </tr>
+
+ <% if @proposal.approved? %>
+  <tr>
+    <td><strong>Approved Date:</strong></td>
+    <td> <%=h @proposal.approval_date.strftime("%Y-%m-%d") %></td>
+  </tr> 
+<% end %>
+  <tr>
+  	<td><strong>Expiry Date:</strong></td>
+	<td><%= @proposal.expiry_date rescue "" %></td>
+  </tr>
+        
+</table>
+
+    <%= render :partial => "proposal", :locals => {:investor => @proposal} %>
+  
+
+<table>
+  <tr>
+    <td style="width: 200px"><strong>Mode Of Payment:</strong></td>
+    <td><%=h @proposal.mode_of_payment.name %></td>
+  </tr>
+  
+  <tr>
+    <td>
+       <strong>Payment Method:</strong>
+    </td>
+    <td>
+      <%=h @proposal.payment_method.name %>
+      <% if @proposal.paid_with_card? %>
+         |
+         <%= @proposal.card_info %>
+      <% end %>
+    </td>
+  </tr>
+  
+  
+    <tr>
+    <td>
+      <strong>Backdate:</strong>
+    </td>
+    <td>
+       <%=h @proposal.backdate_info %>
+    </td>
+  </tr>
+
+  
+</table>
+
+
+<table>
+  <tr>
+    <td style="width: 200px"><strong>Plan:</strong>
+    </td>
+    <td>
+         <%=h @proposal.plan_selection %></td>
+    <td>
+      <p> <strong>Sum Assured:</strong>
+      <%=h number_to_currency(@proposal.sum_assured) %></p>
+    </td>
+    <td>
+      <p>  <strong>Policy Term:</strong>
+         <%=h @proposal.policy_term %></p>
+    </td>
+    <td>
+      <p><strong>Premium Term:</strong>
+       <%=h @proposal.premium_term %></p>
+    </td>
+    <td>
+      <p><strong>Modal Premium:</strong>
+        <%=h number_to_currency(@proposal.modal_premium) %></p>
+    </td>
+  </tr>
+
+  <tr>
+    <td><strong>Supplementary Benefit:</strong></td>
+    <td><%=h @proposal.supplementary_benefit %></td>
+    <td>
+      <p> <strong>Premium:</strong>
+      <%=h number_to_currency(@proposal.sb_sum_assured) %></p>
+    </td>
+    <td>
+      <p>  <strong>Policy Term:</strong>
+         <%=h @proposal.sb_policy_term %></p>
+    </td>
+    <td>
+      <p><strong>Premium Term:</strong>
+       <%=h @proposal.sb_premium_term %></p>
+    </td>
+    <td>
+      <p><strong>Modal Premium:</strong>
+        <%=h number_to_currency(@proposal.sb_modal_premium) %></p>
+    </td>
+  </tr>
+</table>
+
+
+<br />
+<hr/>
+<br/>
+
+<% if @proposal.has_proposer %>
+  <%= render :partial => 'proposer', :locals => {:proposer => @proposal} %>
+<% end %>
+
+
+<br />
+<% if is_admin? %>
+  <div>
+    <%= generate_previous_next_label(@first, @previous, @next, @last) %>
+  </div>
+  <br />
+<% end %>
+<p>
+  <% if is_admin? %>
+    <% unless @proposal.approved? %>
+      <%= link_to "Edit", edit_proposal_path(@proposal) %> |
+    <% end %>
+    <% unless @proposal.deleted? and @proposal.void? %>
+      <%= link_to "Destroy", cancellation_date_proposal_path(@proposal) %> |
+    <% end %>
+  <% end %>
+
+    <% if request.referer.include?("/proposals/policy") %>
+      <%= link_to "View All", policy_proposals_path %>
+    <% else %>
+     <%= link_to "View All", proposals_path %>
+    <% end %>
+</p>
+
+<br />
+<hr />
+<br />
+
+
+
+

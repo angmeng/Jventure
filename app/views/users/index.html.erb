@@ -1,0 +1,45 @@
+<% title "Admins" %>
+<br />
+ <% unless action_name == "profile" %>
+     <%=  link_to 'New', new_user_path %> |
+ <%= link_to "Back to Menu", :controller => "member_area", :action => "base_setup" %>
+ <% end %>
+<br />
+<br />			
+
+<% paginated_section @users do %>
+<table class="list">
+  <thead>
+  <tr>
+    <th>Full Name</th>
+    <th>User Name</th>
+  
+    <th>Email</th>
+	<th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% for user in @users %>
+     <tr class="<%= cycle "odd", "even"  %> ">
+
+      <td><%=h user.fullname %></td>
+      <td><%=h user.username %></td>
+  
+      <td><%=h user.email %></td>
+      <td align="center">
+      <%= link_to "Edit", edit_user_path(user) %>
+	 
+      <%= link_to "Destroy", user, :confirm => 'Are you sure?', :method => :delete %>
+	  <%=  link_to "Change Password", change_password_user_path(user)%>
+	  </td>
+    </tr>
+  <% end %>
+    </tbody>
+
+</table>
+
+  <% end %>
+   <br />
+  <%= page_entries_info @users, :entry_name => 'admin' %>
+

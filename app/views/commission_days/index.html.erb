@@ -1,0 +1,35 @@
+
+<% title "Commission Days" %>
+<br />
+
+<%= link_to 'New commission_day', new_commission_day_path %>
+<br />
+<table class="list">
+  <thead>
+  <tr>
+    <th>Description</th>
+    <th>From Calculate day</th>
+    <th>To Calculate day</th>
+    <th>Include Basic Comm</th>
+    <th>Include Overriding Comm</th>
+    <th>Include Renewal Comm</th>
+    <th>Action</th>
+  </tr>
+</thead>
+   <tbody>
+<% @commission_days.each do |commission_day| %>
+  <tr class="<%= cycle "odd", "even"  %> ">
+    <td><%=h commission_day.description %></td>
+    <td style="text-align: center"><%=h commission_day.from_calculate_day %></td>
+     <td style="text-align: center"><%=h commission_day.to_calculate_day %></td>
+      <td style="text-align: center"><%=h commission_day.basic_commission %></td>
+       <td style="text-align: center"><%=h commission_day.overriding_commission %></td>
+      <td style="text-align: center"><%=h commission_day.renewal %></td>
+    <td style="text-align: center"><%= link_to 'Edit', edit_commission_day_path(commission_day) %>
+      <%= link_to 'Destroy', commission_day, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+    </tbody>
+</table>
+
+<br />

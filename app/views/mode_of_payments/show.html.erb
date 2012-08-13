@@ -1,0 +1,35 @@
+<% title "Mode Of Payment" %>
+<br />
+
+<p>
+  <%= link_to "Edit", edit_mode_of_payment_path(@mode_of_payment) %> |
+  <%= link_to "Destroy", @mode_of_payment, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", mode_of_payments_path %>
+</p>
+
+<br />
+
+<div>
+  <%= generate_previous_next_label(@first, @previous, @next, @last) %>
+</div>
+<br />
+<p>
+  <strong>Name:</strong>
+  <%=h @mode_of_payment.name %>
+</p>
+<p>
+  <strong>Factor Month:</strong>
+  <%=h @mode_of_payment.factor_month %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%=h @mode_of_payment.description %>
+</p>
+
+<br />
+<div>
+  <%= generate_previous_next_label(@first, @previous, @next, @last) %>
+</div>
+<br />
+
+

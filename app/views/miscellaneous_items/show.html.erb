@@ -1,0 +1,47 @@
+
+<% title "Miscellaneous" %>
+<br />
+
+<%= link_to 'Edit', edit_miscellaneous_item_path(@miscellaneous_item) %> |
+<%= link_to 'Back', miscellaneous_items_path %>
+<br /><br />
+
+<p>
+  <b>Transaction date:</b>
+  <%=h @miscellaneous_item.transaction_date %>
+</p>
+
+<p>
+  <b>Agent:</b>
+  <%=h @miscellaneous_item.agent.screen_name %>
+</p>
+
+
+<p>
+  <b>Title:</b>
+  <%=h @miscellaneous_item.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @miscellaneous_item.description %>
+</p>
+
+
+
+<p>
+  <b>Amount:</b>
+  <%=h number_to_currency(@miscellaneous_item.amount) %>
+</p>
+
+<p>
+  <b>Is Builtin?:</b>
+  <%=h @miscellaneous_item.builtin %>
+</p>
+
+<p>
+  <b>Is overriding Charger?:</b>
+  <%=h @miscellaneous_item.overriding_charger %>
+</p>
+
+

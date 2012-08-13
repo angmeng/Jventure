@@ -1,0 +1,46 @@
+
+      <!-- content -->
+      <br /><br />
+      <%  if flash[:notice] %>
+      <div style="background-color:LightGreen;width:90%;height:25px;padding:20px 20px 20px 20px;">
+        <%= flash[:notice] %>
+      </div>
+      <% end %>
+
+      <%  if flash[:error] %>
+      <div style="background-color:pink;width:90%;height:25px;padding:20px 20px 20px 20px;">
+        <%= flash[:error] %>
+      </div>
+      <% end %>
+
+       <div id="waiting" style="background-color:pink;width:90%;height:25px;padding:20px 20px 20px 20px;display:none;">
+        Please wait for a moment ......
+      </div>
+
+      <div id="content">
+        <h3>Contact Us</h3>
+        <p class="p1">Want to contact us? We'd love to hear from you ! Here's how:
+  Fill up the form below, and click send.</p>
+     
+         <% form_tag({:action => "contact_submission"}, :class => 'contacts-form', :id => 'contacts-form') do %>
+          <fieldset>
+          <div class="field">
+            <label>Your Name:</label>
+            <input name="guest_name" type="text" value=""/>
+          </div>
+          <div class="field">
+            <label>Your E-mail:</label>
+            <input name="email" type="text" value=""/>
+          </div>
+          <div class="field">
+            <label>Contact Number:</label>
+            <input name="mobile" type="text" value=""/>
+          </div>
+          <div class="field">
+            <label>Your Message:</label>
+            <textarea name="comment" cols="1" rows="1"></textarea>
+          </div>
+          <div class="wrapper"><a href="#" class="link1" onclick="document.getElementById('waiting').style.display='block';document.getElementById('contacts-form').submit();"><em><b>Send Your Message!<span>Send Your Message!</span></b></em></a></div>
+          </fieldset>
+        <% end  %>
+      </div>

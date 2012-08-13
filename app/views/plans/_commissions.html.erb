@@ -1,0 +1,43 @@
+<h2>Commission Scheme</h2>
+<table class="list" style="width:50%">
+  <thead>
+	<tr>
+		<th>Tier</th>
+		<th>Year</th>
+		<th>Percentage</th>
+		<th>Action</th>
+	</tr>
+	  </thead>
+
+  <tbody>
+     <% for c in @plan.commissions %>
+	   <tr class="<%= cycle "odd", "even"  %>" style="text-align: center">
+	   	<td><%= c.tier_id %></td>
+		<td><%= c.commission_year %></td>
+		<td><%= c.percentage %></td>
+		<td><%= link_to_remote("Remove", :url => {:controller => "plans", :action => 'remove_commission', :id => c}, :confirm => "Are you sure ?") %></td>
+	   </tr>
+
+	 <% end %>
+
+  </tbody>
+</table>
+<br />
+
+<% form_remote_tag :url => {:action => "submit_commission", :id => @plan} do %>
+    <%= error_messages_for "commission" %>
+  <p>
+    Tier<br />
+    <%= text_field "commission", "tier_id" %>
+  </p>
+  <p>
+    Year<br />
+    <%= text_field "commission", "commission_year" %>
+  </p>
+  <p>
+    Commission Percentage<br />
+    <%= text_field "commission", "percentage" %>
+  </p>
+  <p><%= submit_tag "Add Commission", {:disable_with => "Please wait ..."} %></p>
+
+<% end %>

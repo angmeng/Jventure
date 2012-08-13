@@ -1,0 +1,29 @@
+<div id="content">
+			
+  <% form_tag sessions_path, {:id => "form1"} do %>
+  
+	<% if flash[:error] %>
+	<p class="flash_error" id="errmsg">
+		<%= flash[:error] %>
+	</p>
+	<% end %>
+
+ <br />
+<div class="bok">
+   <h1>Admin Login</h1>
+   <br/>
+        <label>
+<SPAN id="Label1">Login ID:</SPAN>
+        <%= text_field_tag "txtLoginID", nil, :class => "input_text" %>
+        </label>
+
+       <label>
+<SPAN id="Label2">Password:</SPAN>
+        <%= password_field_tag "txtPassword", nil, :class => "input_text" %>
+        <%= submit_tag "Login",  :class=>"button" %>
+    </label>
+    </div>
+    <% end  %>
+  <br></br>
+                    
+</div>

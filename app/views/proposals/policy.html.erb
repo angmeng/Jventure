@@ -1,0 +1,75 @@
+  <% title "Policies" %>
+
+<br />
+<% form_for @search do |f| %>
+<table>
+  <tr>
+    <th>Proposal No</th>
+    <th>Policy No</th>
+    <th>Agent</th>
+    <th>Life Assured</th>
+    <th>New IC No</th>
+    <th>Action</th>
+  </tr>
+
+  <tr>
+    <td><%= f.text_field :proposal_number_equals  %> </td>
+    <td><%= f.text_field :policy_number_equals  %> </td>
+    <td><%= text_field_with_auto_complete :investor, :name, {:size => 30}, { :url => show_agent_proposals_path, :method => :get, :with => "'search='+element.value" }  %> </td>
+    <td><%= f.text_field :fullname_equals %></td>
+    <td><%= f.text_field :new_ic_number_like %></td>
+    <td><%= f.submit "Search" %></td>
+
+  </tr>
+
+</table>
+<% end %>
+
+<br />
+
+<% paginated_section @proposals do %>
+<br /><br />
+<table class="list">
+  <thead>
+  <tr>
+    <th>Agent Code</th>
+    <th>Proposal Number</th>
+    <th>Policy Number</th>
+	  <th>Expiry Date</th>
+    <th>Upline</th>
+    <th>Life Assured</th>
+    <th>I/C No</th>
+    
+    <th>Sum Assured</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% for proposal in @proposals %>
+    <tr class="<%= cycle "odd", "even"  %> ">
+      <td><%=h proposal.investor.screen_name %></td>
+      <td style="text-align: left"><%=h proposal.proposal_number %></td>
+      <td style="text-align: left"><%= proposal.policy_status %></td>
+	    <td style="text-align: center"><%=h proposal.expiry_date %></td>
+      <td><%=h proposal.agent_name %></td>
+      <td><%=h proposal.fullname %></td>
+      <td style="text-align: center"><%=h proposal.new_ic_number %></td>
+      
+      <td style="text-align: right"><%=h number_to_currency(proposal.sum_assured) %></td>
+      <td style="text-align: center"><%= link_to "Show", proposal %> 
+        <% if is_admin? %>
+         | <%= link_to "Commission", commission_detail_proposal_path(proposal) %>
+         | <%= link_to "Edit", edit_proposal_path(proposal) %> 
+          <% link_to "destroy", proposal,:confirm => 'Are you sure you want to delete?', :method => :delete %>
+        <% end %>
+     </td>
+    </tr>
+  <% end %>
+    </tbody>
+</table>
+  <% end %>
+   <br />
+  <%= page_entries_info @proposals, :entry_name => 'proposal' %>
+
+

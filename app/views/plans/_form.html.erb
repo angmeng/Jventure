@@ -1,0 +1,28 @@
+<% form_for @plan do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :sum_assured %><br />
+    <%= f.text_field :sum_assured %>
+  </p>
+  <p>
+    <%= f.label :policy_term %><br />
+    <%= f.text_field :policy_term %>
+  </p>
+  <p>
+    <%= f.label :premium_term %><br />
+    <%= f.text_field :premium_term %>
+  </p>
+  <p>
+    <%= f.label :modal_premium %><br />
+    <%= f.text_field :modal_premium %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :size => "60x8" %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

@@ -1,0 +1,30 @@
+<% title "Overriding Charge" %>
+<%= link_to 'Edit', edit_overriding_charge_path(@overriding_charge) %> |
+<%= link_to 'Back', overriding_charges_path %>
+<br />
+<p>
+  <b>Agent:</b>
+  <%=h @overriding_charge.agent_id %>
+</p>
+
+<p>
+  <b>Charger date:</b>
+  <%=h @overriding_charge.charger_date %>
+</p>
+
+<p>
+  <b>Charger year:</b>
+  <%=h @overriding_charge.charger_year %>
+</p>
+
+<p>
+  <b>Miscellaneous item:</b>
+  <%=h @overriding_charge.miscellaneous_item_id %>
+</p>
+
+<p>
+  <b>Remark:</b>
+  <%=h @overriding_charge.remark %>
+</p>
+
+

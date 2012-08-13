@@ -1,0 +1,32 @@
+<div id="content">
+
+	<% form_tag create_agent_sessions_path, {:id => "form1"} do %>
+
+	<% if flash[:error] %>
+	<p class="flash_error" id="errmsg">
+		<%= flash[:error] %>
+	</p>
+	<% end %>
+
+
+
+  <br />
+<div class="bok">
+	
+   <h1>Agent Login</h1>
+   <br />
+        <label>
+<SPAN id="Label">Login ID:</SPAN>
+        <%= text_field_tag "txtLoginID", nil, :class => "input_text" %>
+        </label>
+
+       <label>
+<SPAN id="Label">Password:</SPAN>
+        <%= password_field_tag "txtPassword", nil, :class => "input_text" %>
+        <%= submit_tag "Login",  :class=>"button" %>
+    </label>
+    </div>
+    <% end  %>
+</div>
+<br></br>
+                 

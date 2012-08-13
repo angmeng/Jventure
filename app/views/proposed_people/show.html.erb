@@ -1,0 +1,13 @@
+<p>
+  <b>Proposal:</b>
+  <%=h @proposed_person.proposal_id %>
+</p>
+
+<p>
+  <b>Proposer:</b>
+  <%=h @proposed_person.proposer_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_proposed_person_path(@proposed_person) %> |
+<%= link_to 'Back', proposed_people_path %>

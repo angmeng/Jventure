@@ -1,0 +1,22 @@
+<h1>Listing proposed_people</h1>
+
+<table>
+  <tr>
+    <th>Proposal</th>
+    <th>Proposer</th>
+  </tr>
+
+<% @proposed_people.each do |proposed_person| %>
+  <tr>
+    <td><%=h proposed_person.proposal_id %></td>
+    <td><%=h proposed_person.proposer_id %></td>
+    <td><%= link_to 'Show', proposed_person %></td>
+    <td><%= link_to 'Edit', edit_proposed_person_path(proposed_person) %></td>
+    <td><%= link_to 'Destroy', proposed_person, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New proposed_person', new_proposed_person_path %>

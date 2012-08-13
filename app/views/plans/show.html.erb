@@ -1,0 +1,65 @@
+<%= render 'shared/tabs' %>
+
+<% title "Plan" %>
+<br />
+<p>
+  <%= link_to "Edit", edit_plan_path(@plan) %> |
+  <%= link_to "Destroy", @plan, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", plans_path %>
+
+</p>
+<br />
+<p>
+  <strong>Name:</strong>
+  <%=h @plan.name %>
+</p>
+<p>
+  <strong>Sum Assured:</strong>
+  <%=h number_to_currency(@plan.sum_assured) %>
+</p>
+<p>
+  <strong>Policy Term:</strong>
+  <%=h @plan.policy_term %>
+</p>
+<p>
+  <strong>Premium Term:</strong>
+  <%=h @plan.premium_term %>
+</p>
+<p>
+  <strong>Modal Premium:</strong>
+  <%=h number_to_currency(@plan.modal_premium) %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%=h @plan.description %>
+</p>
+
+
+ <div id="tabs">
+    <ul>
+        <li style="margin-left: 1px;margin-right: 20px;width: 150px" id="tabHeaderActive"><a style="width:150px" href="javascript:void(0)" onClick="toggleTab(1,2)">
+        	<span>Commission</span></a></li>
+        <li id="tabHeader2" style="width:150px"><a style="width:150px" href="javascript:void(0)" onClick="toggleTab(2,2)" >
+                <span>Supplementary</span></a></li>
+    </ul>
+ </div>
+    <div id="tabscontent">
+        <div id="tabContent1" class="tabContent" style="display:yes;">
+            <br /><div id="commissions">
+            	<%= render "commissions" %>
+            </div>
+        </div>
+
+        <div id="tabContent2" class="tabContent" style="display:none;">
+            <br /><div>
+            	<div id="supplementary">
+                  <%= render 'supplementary' %>
+                </div>
+            </div>
+        </div>
+
+    </div><!--End of tabscontent-->
+
+
+
+

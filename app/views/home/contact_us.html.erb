@@ -1,0 +1,49 @@
+<!-- content -->
+		<div id="content">
+			<div class="wrapper">
+				<div class="aside"><div class="inner_copy">More <a href="http://www.templates.com/">Website Templates</a> @ Templates.com!</div>
+					<div class="section">
+<!-- box begin -->
+						<div class="box">
+							<div class="inner">
+								<h4><span><span>Our products</span></span></h4>
+                                <div class="inner">
+                                  <dl>
+                                    <dt>Uni Guaranteed   Cash Plus (UGCP).</dt>
+                                    <dd>Save and earn with us..</dd>
+                                  </dl>
+                                </div>
+                                <div class="inner">
+								</div>
+							</div>
+						</div>
+<!-- box end -->
+					</div>
+<!-- box1 begin -->
+					<div class="box1">
+						<div class="inner">
+							
+						</div>
+					</div>
+<!-- box1 end -->
+				</div>
+				<div class="mainContent">
+					<h2>Contact Us</h2>
+					<p style="color:yellow;font-size:large;"><%= flash[:notice] %></p>
+					<p style="color:pink;font-size:large;"><%= flash[:error] %></p>
+					<div class="indent">
+					
+						<% form_tag( {:action => "contact_submission"}, :id => "contacts-form") do %>
+						
+						  <fieldset>
+								<div class="field"><label>Your Name:</label><input type="text" name="guest_name" value=""/></div>
+								<div class="field"><label>Your E-mail:</label><input type="text" name="email" value=""/></div>
+								<div class="field"><label>Your Mobile No:</label><input type="text" name="mobile" value=""/></div>
+								<div class="field"><label>Your Message:</label><textarea name="comment" cols="1" rows="1"></textarea></div>
+								<div class="wrapper"><a href="#" onclick="document.getElementById('contacts-form').submit()">Send Your Message!</a></div>
+							</fieldset>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>

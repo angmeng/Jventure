@@ -1,0 +1,19 @@
+<h1>New proposed_person</h1>
+
+<% form_for(@proposed_person) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :proposal_id %><br />
+    <%= f.text_field :proposal_id %>
+  </p>
+  <p>
+    <%= f.label :proposer_id %><br />
+    <%= f.text_field :proposer_id %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', proposed_people_path %>

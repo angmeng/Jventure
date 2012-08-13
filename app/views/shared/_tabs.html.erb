@@ -1,0 +1,111 @@
+<% content_for :head do %>
+
+  <script type="text/javascript">
+/*-----------------------------------------------------------
+    Toggles element's display value
+    Input: any number of element id's
+    Output: none
+    ---------------------------------------------------------*/
+function toggleDisp() {
+    for (var i=0;i<arguments.length;i++){
+        var d = $(arguments[i]);
+        if (d.style.display == 'none')
+            d.style.display = 'block';
+        else
+            d.style.display = 'none';
+    }
+}
+/*-----------------------------------------------------------
+    Toggles tabs - Closes any open tabs, and then opens current tab
+    Input:     1.The number of the current tab
+                    2.The number of tabs
+                    3.(optional)The number of the tab to leave open
+                    4.(optional)Pass in true or false whether or not to animate the open/close of the tabs
+    Output: none
+    ---------------------------------------------------------*/
+function toggleTab(num,numelems,opennum,animate) {
+    if ($('tabContent'+num).style.display == 'none'){
+        for (var i=1;i<=numelems;i++){
+            if ((opennum == null) || (opennum != i)){
+                var temph = 'tabHeader'+i;
+                var h = $(temph);
+                if (!h){
+                    var h = $('tabHeaderActive');
+                    h.id = temph;
+                }
+                var tempc = 'tabContent'+i;
+                var c = $(tempc);
+                if(c.style.display != 'none'){
+                    if (animate || typeof animate == 'undefined')
+                        Effect.toggle(tempc,'blind',{duration:0.5, queue:{scope:'menus', limit: 3}});
+                    else
+                        toggleDisp(tempc);
+                }
+            }
+        }
+        var h = $('tabHeader'+num);
+        if (h)
+            h.id = 'tabHeaderActive';
+        h.blur();
+        var c = $('tabContent'+num);
+        c.style.marginTop = '2px';
+        if (animate || typeof animate == 'undefined'){
+            Effect.toggle('tabContent'+num,'blind',{duration:0.5, queue:{scope:'menus', position:'end', limit: 3}});
+        }else{
+            toggleDisp('tabContent'+num);
+        }
+    }
+}
+</script>
+
+<style>
+    #tabs{
+        margin-left: 4px;
+        padding: 10px 10px 10px 10px;
+        background: transparent;
+        voice-family: "\"}\"";
+        voice-family: inherit;
+        padding-left: 5px;
+    }
+    #tabs ul{
+        font: bold 11px Arial, Verdana, sans-serif;
+        margin:0;
+        padding:0;
+        list-style:none;
+    }
+    #tabs li{
+        display:inline;
+        margin:0 2px 0 0;
+        padding:0;
+        text-transform:uppercase;
+    }
+    #tabs a{
+        float:left;
+        background:#A3BBE6  no-repeat left top;
+        margin:0 2px 0 2px;
+        padding:0 0 1px 3px;
+        text-decoration:none;
+        
+    }
+    #tabs a span{
+        float:left;
+        display:block;
+        background: transparent  no-repeat right top;
+        padding:4px 9px 2px 6px;
+        
+    }
+    #tabs a span{float:none;}
+    #tabs a:hover{background-color: #7E94B9;color: white;}
+    #tabs a:hover span{background-color: #7E94B9;}
+    #tabHeaderActive span, #tabHeaderActive a { background-color: #42577B; color:#fff;}
+    .tabContent {
+        clear:both;
+        border:2px solid #42577B;
+        padding-top:5px;
+        padding-left:20px;
+        padding-bottom:20px;
+        background-color:#FFF;
+    }
+</style>
+
+<% end %>

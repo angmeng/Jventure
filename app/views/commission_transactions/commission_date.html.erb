@@ -1,0 +1,80 @@
+<% title "Generate Commission" %>
+
+<br />
+<br />
+
+<h3>Generate Overriding Commissions</h3>
+ <fieldset style="background-color: #EDDA74;">
+    <legend>
+      </legend>
+<% form_tag calculate_sub_commission_transactions_path do %>
+<table style="width:80%">
+  <tr>
+    <th>Month </th>
+    <th>Year </th>
+    <th>Type</th>
+    <th>Action</th>
+  </tr>
+  <tr>
+    <td align="center"><%= select_month(Date.today, :use_month_numbers => true) %> </td>
+     <td align="center"><%=  select_year(Date.today, :start_year => (Date.today - 1.year).year, :end_year => (Date.today + 1.year).year)%> </td>
+      <td align="center">
+      <%  CommissionDay.all.each do |c| %>
+        <%=  check_box_tag "option[#{c.id}][selected]" %> <%= c.description %>
+      <% end %>
+      </td>
+     <td align="center"><%= submit_tag(" Generate Commission ", :confirm => "This will take a fews minutes ...", :disable_with => "Please wait until you get informed...") %></td>
+  </tr>
+
+</table>
+
+<% end %>
+ </fieldset>
+<br /><br />
+<table style="width:100%">
+  <tr>
+    <td style="width:60%" valign="top">
+      <table class="list">
+
+  <tr>
+    <th>Month</th>
+    <th>View Report by Month</th>
+    <th>View report by Days</th>
+    <th>Type</th>
+  </tr>
+
+<% @generations.each do |m| %>
+ <tr class="<%= cycle "odd", "even"  %> " style="text-align: center">
+  <td>
+    <%= m.generate_date.strftime("%B %Y")%>
+  </td>
+  <td>
+    <%= link_to "View Report", view_report_commission_transaction_path(m)  %>
+  </td>
+  <td>
+    <% form_tag report_date_commission_transaction_path(m) do  %>
+    From <%= select_day(1, :field_name => 'from')  %>
+    To <%= select_day(Time.now, :field_name => 'to')  %>
+    <%= submit_tag(" View ", :disable_with => "Please wait ... ") %>
+    <% end %>
+  </td>
+  <td>
+    <%=link_to_remote "Show", :url => {:action => 'show_detail', :generate_date => m.generate_date} %>
+  </td>
+  </tr>
+
+<% end %>
+
+</table>
+    </td>
+    <td>
+      <div id="detail">
+         <%= render :partial => "detail" %>
+      </div>
+    </td>
+  </tr>
+</table>
+
+
+
+

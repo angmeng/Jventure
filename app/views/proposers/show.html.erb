@@ -1,0 +1,150 @@
+<% content_for :body do %>
+
+  <% title "Proposer" %>
+
+<p>
+  <strong>Fullname:</strong>
+  <%=h @proposer.fullname %>
+</p>
+<p>
+  <strong>New Ic Number:</strong>
+  <%=h @proposer.new_ic_number %>
+</p>
+<p>
+  <strong>Old Ic Number:</strong>
+  <%=h @proposer.old_ic_number %>
+</p>
+<p>
+  <strong>Birth Certificate:</strong>
+  <%=h @proposer.birth_certificate %>
+</p>
+<p>
+  <strong>Passport:</strong>
+  <%=h @proposer.passport %>
+</p>
+<p>
+  <strong>Date Of Birth:</strong>
+  <%=h @proposer.date_of_birth %>
+</p>
+<p>
+  <strong>Age:</strong>
+  <%=h @proposer.age %>
+</p>
+<p>
+  <strong>Resident Address:</strong>
+  <%=h @proposer.resident_address %>
+</p>
+<p>
+  <strong>Residence Postcode:</strong>
+  <%=h @proposer.residence_postcode %>
+</p>
+<p>
+  <strong>Residence City:</strong>
+  <%=h @proposer.residence_city %>
+</p>
+<p>
+  <strong>Residence State:</strong>
+  <%=h @proposer.residence_state %>
+</p>
+<p>
+  <strong>Residence Phone Number:</strong>
+  <%=h @proposer.residence_phone_number %>
+</p>
+<p>
+  <strong>Mobile Number:</strong>
+  <%=h @proposer.mobile_number %>
+</p>
+<p>
+  <strong>Company Name:</strong>
+  <%=h @proposer.company_name %>
+</p>
+<p>
+  <strong>Company Address:</strong>
+  <%=h @proposer.company_address %>
+</p>
+<p>
+  <strong>Company Postcode:</strong>
+  <%=h @proposer.company_postcode %>
+</p>
+<p>
+  <strong>Company City:</strong>
+  <%=h @proposer.company_city %>
+</p>
+<p>
+  <strong>Company State:</strong>
+  <%=h @proposer.company_state %>
+</p>
+<p>
+  <strong>Company Phone Number:</strong>
+  <%=h @proposer.company_phone_number %>
+</p>
+<p>
+  <strong>Relationship:</strong>
+  <%=h @proposer.relationship %>
+</p>
+<p>
+  <strong>Height:</strong>
+  <%=h @proposer.height %>
+</p>
+<p>
+  <strong>Weight:</strong>
+  <%=h @proposer.weight %>
+</p>
+<p>
+  <strong>Email:</strong>
+  <%=h @proposer.email %>
+</p>
+<p>
+  <strong>Gender:</strong>
+  <%=h @proposer.gender %>
+</p>
+<p>
+  <strong>Nationality:</strong>
+  <%=h @proposer.nationality_id %>
+</p>
+<p>
+  <strong>Marital Status:</strong>
+  <%=h @proposer.marital_status %>
+</p>
+<p>
+  <strong>Race:</strong>
+  <%=h @proposer.race_id %>
+</p>
+<p>
+  <strong>Religion:</strong>
+  <%=h @proposer.religion_id %>
+</p>
+<p>
+  <strong>Occupation:</strong>
+  <%=h @proposer.occupation %>
+</p>
+<p>
+  <strong>Exact Duties:</strong>
+  <%=h @proposer.exact_duties %>
+</p>
+<p>
+  <strong>Nature Of Business:</strong>
+  <%=h @proposer.nature_of_business %>
+</p>
+<p>
+  <strong>Annual Income:</strong>
+  <%=h @proposer.annual_income %>
+</p>
+<p>
+  <strong>Smoke In Last Twelve Months:</strong>
+  <%=h @proposer.smoke_in_last_twelve_months %>
+</p>
+<p>
+  <strong>Volume Cigarettes Per Day:</strong>
+  <%=h @proposer.volume_cigarettes_per_day %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_proposer_path(@proposer) %> |
+  <%= link_to "Destroy", @proposer, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", proposers_path %>
+</p>
+
+
+<% end %>
+<%= render :partial => '/proposers/main'   %>

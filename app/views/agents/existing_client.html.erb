@@ -1,0 +1,63 @@
+
+<% title "Add agent to proposal" %>
+  <br />
+ 
+<%= link_to "Back", new_proposal_agent_path(:id => session[:proposal_agent_id]) %>
+<br /> <br />
+
+<% form_for @search do |f| %>
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Fullname</th>
+    <th>New Ic Number</th>
+     <th>Action</th>
+  </tr>
+
+  <tr>
+    <td><%= f.text_field :code_equals  %> </td>
+    <td><%= f.text_field :fullname_like  %> </td>
+    <td><%= f.text_field :new_ic_number_equals %></td>
+    <td><%= f.submit "Search" %></td>
+
+  </tr>
+
+</table>
+<% end %>
+
+
+
+<% paginated_section @agents do %>
+<br />
+<table class="list">
+  <thead>
+    <tr>
+    <th>Code</th>
+    <th>Fullname</th>
+    <th>New Ic Number</th>
+    <th>Upline</th>
+    <th>Action</th>
+
+  </tr>
+</thead>
+   <tbody>
+  <% for agent in @agents %>
+    <tr class="<%= cycle "odd", "even"  %> ">
+      <td><%=h agent.code %></td>
+      <td><%=h agent.fullname %></td>
+      <td style="text-align: center"><%=h agent.new_ic_number %></td>
+
+      <td><%=h agent.upline_status %></td>
+
+      <td style="text-align: center"><%= link_to "Add to proposal", add_agent_to_proposal_agent_path(agent) %> |
+	  <%= link_to "Add to proposer", add_agent_to_proposer_agent_path(agent) %>
+      </td>
+    </tr>
+  <% end %>
+   </tbody>
+</table>
+  <% end %>
+   <br />
+  <%= page_entries_info @agents, :entry_name => 'agent' %>
+
+

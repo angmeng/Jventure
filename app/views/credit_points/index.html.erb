@@ -1,0 +1,39 @@
+<% title "Listing credits" %>
+
+<% if is_admin? %>
+<br />
+<%= link_to 'New', new_credit_point_path %> |
+ <%= link_to "Back to Menu", :controller => "member_area", :action => "base_setup" %>
+ <br />
+<% end %>
+
+
+<% paginated_section @credits do %>
+<br /><br />
+<table class="list">
+  <thead>
+  <tr>
+  	 <th>Date</th>
+    <th>Agent</th>
+    <th>Credit before</th>
+    <th>Added credit</th>
+	<th>Balance</th>
+  </tr>
+</thead>
+   <tbody>
+<% @credits.each do |credit| %>
+   <tr class="<%= cycle "odd", "even"  %> ">
+    <td style="text-align: center"><%=h credit.created_at %></td>
+    <td><%=h credit.agent.screen_name %></td>
+    <td style="text-align: center"><%=h credit.current_credit %></td>
+    <td style="text-align: center"><%=h credit.added_credit %></td>
+    <td style="text-align: center"><%=h credit.balance %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<br />
+ <% end %>
+   <br />
+  <%= page_entries_info @credits, :entry_name => 'record' %>
+

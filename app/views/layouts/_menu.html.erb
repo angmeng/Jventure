@@ -1,0 +1,35 @@
+<div class="menu">
+ <ul>
+        <li><a href="/member_area" class="">Dashboard</a></li>
+        <li><a href="/agents" class="">Agent</a></li>
+        <li><a href="/proposals" class="">Proposal</a></li>
+        <li><%= link_to "Policy", policy_proposals_path  %></li>
+	<li><%= link_to "Renewal", proposal_approvals_path  %></li>
+
+        <li><a href="#" class="">Commission</a>
+          <ul>
+            <li><a href="/commission_transactions/commission_date" class="">Generate Commission</a></li>
+            <li><a href="/commission_transactions" class="">Commission Report</a></li>
+          </ul>
+        </li>
+	      <li><a href="/miscellaneous_items" class="">Miscellaneous</a></li>
+        <li><a href="/board_notices" class="">News</a></li>
+        <li><a href="/login_records" class="">Login History</a></li>
+        <li><a href="/agents/contact" class="">Contact</a></li>
+        <li><a href="#" class="">Maintenance</a>
+          <ul>
+            <li> <%= link_to "Services Charge", services_chargers_url %></li>
+            <li> <%= link_to "Mode of Payment", mode_of_payments_url %></li>
+            <li><%= link_to "Payment Method", payment_methods_url %></li>
+            <li><%= link_to "Payment Fee", payment_fees_url %></li>
+            <li><a href="/plans" class="">Plan</a></li>
+            <li><a href="/credit_points" class="">Agent Credit</a></li>
+            <li><a href="/users" class="">Admin</a></li>
+             <li><%= link_to "Commission Day", commission_days_url %></li>
+            <li><%= link_to "Setting", settings_url %></li> 
+            <li><%= link_to "Import Approval", approvals_url %></li>
+            <li><%= link_to "Check Qualification", agent_info_proposals_path %></li>
+          </ul>  
+        </li>
+  </ul>
+</div>

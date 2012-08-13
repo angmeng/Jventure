@@ -1,0 +1,13 @@
+<p>
+  <b>Agent:</b>
+  <%=h @login_record.agent_id %>
+</p>
+
+<p>
+  <b>Ip address:</b>
+  <%=h @login_record.ip_address %>
+</p>
+
+
+<%= link_to 'Edit', edit_login_record_path(@login_record) %> |
+<%= link_to 'Back', login_records_path %>

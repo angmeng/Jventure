@@ -1,0 +1,40 @@
+
+<% title "Listing board notices" %>
+<br />
+ <% if is_admin? %>
+       <%=  link_to 'New', new_board_notice_path %>
+  <% end %>
+<br /><br />
+
+<% paginated_section @board_notices do %>
+
+<table class="list">
+  <thead>
+  <tr>
+    <th>Create at</th>
+    <th>Title</th>
+    
+    <th>Suspend</th>
+    <th>Action</th>
+  </tr>
+</thead>
+   <tbody>
+<% @board_notices.each do |board_notice| %>
+  <tr>
+    <td style="text-align: center"><%=h board_notice.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+    <td><%=h board_notice.title %></td>
+    
+    <td style="text-align: center"><%=h board_notice.suspend %></td>
+    <td style="text-align: center"><%= link_to 'Show', board_notice %> |
+    <%= link_to 'Edit', edit_board_notice_path(board_notice) %> |
+    <%= link_to 'Destroy', board_notice, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+     </tbody>
+</table>
+  <% end %>
+   <br />
+  <%= page_entries_info @board_notices, :entry_name => 'notice' %>
+   
+
+

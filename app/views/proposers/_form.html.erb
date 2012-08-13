@@ -1,0 +1,150 @@
+<% form_for @proposer do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :fullname %><br />
+    <%= f.text_field :fullname %>
+  </p>
+  <p>
+    <%= f.label :new_ic_number %><br />
+    <%= f.text_field :new_ic_number %>
+  </p>
+  <p>
+    <%= f.label :old_ic_number %><br />
+    <%= f.text_field :old_ic_number %>
+  </p>
+  <p>
+    <%= f.label :birth_certificate %><br />
+    <%= f.text_field :birth_certificate %>
+  </p>
+  <p>
+    <%= f.label :passport %><br />
+    <%= f.text_field :passport %>
+  </p>
+  <p>
+    <%= f.label :date_of_birth %><br />
+    <%= f.date_select :date_of_birth %>
+  </p>
+  <p>
+    <%= f.label :age %><br />
+    <%= f.text_field :age %>
+  </p>
+  <p>
+    <%= f.label :resident_address %><br />
+    <%= f.text_area :resident_address, :size => "60x8" %>
+  </p>
+  <p>
+    <%= f.label :residence_postcode %><br />
+    <%= f.text_field :residence_postcode %>
+  </p>
+  <p>
+    <%= f.label :residence_city %><br />
+    <%= f.text_field :residence_city %>
+  </p>
+  <p>
+    <%= f.label :residence_state %><br />
+    <%= f.text_field :residence_state %>
+  </p>
+  <p>
+    <%= f.label :residence_phone_number %><br />
+    <%= f.text_field :residence_phone_number %>
+  </p>
+  <p>
+    <%= f.label :mobile_number %><br />
+    <%= f.text_field :mobile_number %>
+  </p>
+  <p>
+    <%= f.label :company_name %><br />
+    <%= f.text_field :company_name %>
+  </p>
+  <p>
+    <%= f.label :company_address %><br />
+    <%= f.text_area :company_address, :size => "60x8" %>
+  </p>
+  <p>
+    <%= f.label :company_postcode %><br />
+    <%= f.text_field :company_postcode %>
+  </p>
+  <p>
+    <%= f.label :company_city %><br />
+    <%= f.text_field :company_city %>
+  </p>
+  <p>
+    <%= f.label :company_state %><br />
+    <%= f.text_field :company_state %>
+  </p>
+  <p>
+    <%= f.label :company_phone_number %><br />
+    <%= f.text_field :company_phone_number %>
+  </p>
+  <p>
+    <%= f.label :relationship %><br />
+    <%= f.text_field :relationship %>
+  </p>
+  <p>
+    <%= f.label :height %><br />
+    <%= f.text_field :height %>
+  </p>
+  <p>
+    <%= f.label :weight %><br />
+    <%= f.text_field :weight %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <br />
+  <p>
+    <%= f.label :gender %><br />
+    <%= f.radio_button :gender, "Male" %>Male
+    <%= f.radio_button :gender, "Female" %>Female
+  </p>
+  <br />
+  <p>
+    <%= f.label :nationality_id %><br />
+    <%= f.select :nationality_id, Nationality.all.map {|n| [n.name, n.id]}, {:include_blank => true} %>
+  </p>
+  <br />
+  <p>
+    <%= f.label :marital_status %><br />
+      <%= f.radio_button :marital_status, "Married" %> Married
+    <%= f.radio_button :marital_status, "Single" %> Single
+    <%= f.radio_button :marital_status, "Widowed" %> Widowed
+    <%= f.radio_button :marital_status, "Divorced" %> Divorced
+  </p>
+  <br />
+  <p>
+    <%= f.label :race_id %><br />
+    <%= f.select :race_id, Race.all.map {|r| [r.name, r.id]}, {:include_blank => true} %>
+  </p>
+  <p>
+    <%= f.label :religion_id %><br />
+    <%= f.select :religion_id, Religion.all.map {|r| [r.name, r.id]}, {:include_blank => true} %>
+  </p>
+  <p>
+    <%= f.label :occupation %><br />
+    <%= f.text_field :occupation %>
+  </p>
+  <p>
+    <%= f.label :exact_duties %><br />
+    <%= f.text_field :exact_duties %>
+  </p>
+  <p>
+    <%= f.label :nature_of_business %><br />
+    <%= f.text_field :nature_of_business %>
+  </p>
+  <p>
+    <%= f.label :annual_income %><br />
+    <%= f.text_field :annual_income %>
+  </p>
+  <br />
+  <p>
+    <%= f.label :smoke_in_last_twelve_months %>?<br />
+    <%= f.check_box :smoke_in_last_twelve_months %>
+  </p>
+  <br />
+  <p>
+    <%= f.label :volume_cigarettes_per_day %><br />
+    <%= f.text_field :volume_cigarettes_per_day %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

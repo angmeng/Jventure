@@ -1,0 +1,28 @@
+<% if @results %>
+  <% form_tag regenerate_commission_transaction_path(@results[0]) do %>
+<h3><%= @results[0].generate_date.strftime("%Y-%m")  %> </h3>
+<table class="list">
+  <tr>
+    <th></th>
+    <th style="text-align: left">Type</th>
+
+  </tr>
+  <% @results.each do |i| %>
+  <tr>
+  <td>
+    <%= check_box_tag "option[#{i.commission_day.id.to_s}][selected]", {}, @results.include?(i) %>
+  </td>
+  <td>
+    <%= i.commission_day.description %>
+  </td>
+</tr>
+  <% end %>
+  <tr>
+    <td colspan="2"><%= submit_tag("Regenerate", :confirm => "Are you sure you want to destroy the data and regenerate ?", :disable_with => "Please wait until you get informed...")%> </td>
+  </tr>
+</table>
+
+ <% end %>
+
+
+<% end %>

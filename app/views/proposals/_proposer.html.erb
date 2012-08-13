@@ -1,0 +1,76 @@
+
+
+<fieldset>
+  <legend>Proposer</legend>
+
+  <p>
+  <strong>Fullname:</strong>
+  <%=h proposer.proposer_fullname %> &nbsp &nbsp
+  <% if  is_admin? %>
+   <% unless proposer.proposer_is_agent? %>
+     <%= link_to "Convert proposer to agent", convert_proposer_proposal_path(proposer) %>
+   <% end %>
+  <% end %>
+</p>
+<p>
+  <strong>New Ic Number:</strong>
+  <%=h proposer.proposer_new_ic_number %>
+</p>
+<p>
+  <strong>Old Ic Number:</strong>
+  <%=h proposer.proposer_old_ic_number %>
+</p>
+<p>
+  <strong>Birth Certificate:</strong>
+  <%=h proposer.proposer_birth_certificate %>
+</p>
+<p>
+  <strong>Passport:</strong>
+  <%=h proposer.proposer_passport %>
+</p>
+<p>
+  <strong>Date Of Birth:</strong>
+  <%=h proposer.proposer_date_of_birth %>
+</p>
+<p>
+  <strong>Age:</strong>
+  <%=h proposer.proposer_age %>
+</p>
+<p>
+  <strong>Resident Address:</strong>
+  <%=h proposer.proposer_resident_address %>
+</p>
+<p>
+  <strong>Residence Postcode:</strong>
+  <%=h proposer.proposer_residence_postcode %>
+</p>
+<p>
+  <strong>Residence City:</strong>
+  <%=h proposer.proposer_residence_city %>
+</p>
+<p>
+  <strong>Residence State:</strong>
+  <%=h proposer.proposer_residence_state %>
+</p>
+<p>
+  <strong>Residence Phone Number:</strong>
+  <%=h proposer.proposer_residence_phone_number %>
+</p>
+<p>
+  <strong>Mobile Number:</strong>
+  <%=h proposer.proposer_mobile_number %>
+</p>
+
+<p>
+  <strong>Relationship:</strong>
+  <%=h proposer.proposer_relationship %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%=h proposer.proposer_email %>
+</p>
+
+
+
+</fieldset>

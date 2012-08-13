@@ -1,0 +1,25 @@
+<br /><br/>
+<%= link_to 'Back', credit_points_path %>
+<br /><br />
+
+
+
+<p>  <b>Date:</b>
+  <%=h @credit.created_at %></p>
+  
+<p>
+  <b>Agent:</b>
+  <%=h @credit.agent.screen_name %>
+</p>
+
+<p>
+  <b>Current credit:</b>
+  <%=h @credit.current_credit %>
+</p>
+
+<p>
+  <b>Added credit:</b>
+  <%=h @credit.added_credit %>
+</p>
+
+

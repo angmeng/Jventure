@@ -1,0 +1,21 @@
+<% title "Payment Method" %>
+<% title "Payment Method" %>
+<br />
+<p>
+  <%= link_to "Edit", edit_payment_method_path(@payment_method) %> |
+  <%= link_to "Destroy", @payment_method, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", payment_methods_path %>
+</p>
+
+<br />
+<br />
+<p>
+  <strong>Name:</strong>
+  <%=h @payment_method.name %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%=h @payment_method.description %>
+</p>
+
+

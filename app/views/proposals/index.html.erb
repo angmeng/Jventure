@@ -1,0 +1,94 @@
+  <% title "Proposals" %>
+<br />
+<% if is_admin? or is_master_agent? %>
+  <h4>
+    <%= link_to "Registration", new_proposal_path %>
+  </h4><br />
+<% end %>
+
+<% if is_admin? %>
+<% if @last_date  %>
+  <em>
+    Last Check Date : <%= @last_date %>
+  </em>
+  <% else %>
+  <em>Last Check Date : Never done before</em>
+  <% end %>
+  <br />
+<em style="color:red">You should checking the expiry date of all policies once before you approve any proposal at the beginning of the month.
+  If you not yet done that, please click the link below.</em>
+  <br />
+  <h4>
+ <%= link_to "Checking expiry date", check_expiry_date_proposals_path, :confirm => "This will take fews minutes, please wait until you get informed." %>
+  </h4>
+  <% end %>
+
+
+<br />
+<% form_for @search do |f| %>
+<table>
+  <tr>
+    <th>Proposal No</th>
+    <th>Life Assured</th>
+    <th>New IC No</th>
+    <% if is_admin? %>
+      <th>Deleted</th>
+    <% end %>
+    <th>Action</th>
+  </tr>
+
+  <tr>
+    <td><%= f.text_field :proposal_number_equals  %> </td>
+    <td><%= f.text_field :fullname_equals %></td>
+    <td><%= f.text_field :new_ic_number_like %></td>
+    <% if is_admin? %>
+      <td><%= f.select :deleted_equals, [["Yes", true], ["No", false]], {:include_blank => true} %></td>
+    <% end %>
+    <td><%= f.submit "Search" %></td>
+
+  </tr>
+
+</table>
+<% end %>
+
+<br />
+
+<% paginated_section @proposals do %>
+<br/><br />
+<table class="list">
+  <thead>
+  <tr>
+    <th>Proposal Number</th>
+    <th>Referer</th>
+    <th>Life Assured</th>
+    <th>I/C No</th>
+    <th>Proposer</th>
+    <th>Premium</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% for proposal in @proposals %>
+    <tr class="<%= cycle "odd", "even"  %>">
+      <td style="text-align: left"><%=h proposal.proposal_number %></td>
+      <td><%=h proposal.agent_name %></td>
+      <td><%=h proposal.fullname %></td>
+      <td style="text-align: center"><%=h proposal.new_ic_number %></td>
+      <td style="text-align: left"><%=h proposal.proposer_status %></td>
+      <td style="text-align: right"><%=h number_to_currency(proposal.sum_assured) %></td>
+      <td style="text-align: center"><%=h proposal.deleted_status %></td>
+      <td style="text-align: center"><%= link_to "Show", proposal %> |
+      <%= link_to "Edit", edit_proposal_path(proposal) %> 
+      <% link_to "destroy", proposal,:confirm => 'Are you sure you want to delete?', :method => :delete %>
+     </td>
+    </tr>
+  <% end %>
+    </tbody>
+</table>
+  <% end %>
+   <br />
+  <%= page_entries_info @proposals, :entry_name => 'proposal' %>
+
+

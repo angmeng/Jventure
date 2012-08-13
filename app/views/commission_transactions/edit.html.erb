@@ -1,0 +1,32 @@
+<h1>Editing commission_transaction</h1>
+
+<% form_for(@commission_transaction) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :proposal_id %><br />
+    <%= f.text_field :proposal_id %>
+  </p>
+  <p>
+    <%= f.label :agent_id %><br />
+    <%= f.text_field :agent_id %>
+  </p>
+  <p>
+    <%= f.label :level_paid %><br />
+    <%= f.text_field :level_paid %>
+  </p>
+  <p>
+    <%= f.label :amount %><br />
+    <%= f.text_field :amount %>
+  </p>
+  <p>
+    <%= f.label :date_paid %><br />
+    <%= f.date_select :date_paid %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @commission_transaction %> |
+<%= link_to 'Back', commission_transactions_path %>
