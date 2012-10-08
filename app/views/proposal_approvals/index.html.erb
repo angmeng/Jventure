@@ -4,8 +4,8 @@
 		document.getElementById("process").style.display="block";
                 document.getElementById("reminder").style.display="none";
 	}
-
 </script>
+ <%= javascript_include_tag("smo") %>
 <% end  %>
 
 
@@ -44,20 +44,23 @@
 <% end %>
 
 <br />
-
-<% paginated_section @proposals do %>
+<% form_tag batch_renew_proposal_approvals_path do %>
+    Approval date : <%= calendar_date_select_tag "approval_date" %>
+    Renew to Year : <%= select_tag "renewal_year", options_for_select(1.upto(20).to_a) %>
+    <%= submit_tag "Submit", :disable_with => "Please wait ...", :confirm => "Are you you want to renew the selected records to the selected year ?"  %>
+    <% paginated_section @proposals do %>
 <br /><br />
 <table class="list">
   <thead>
   <tr>
-    <th>Proposal Number</th>
+    <th><input type="checkbox" name="checkall" onclick="checkUncheckAll(this);"/></th>
     <th>Policy Number</th>
     <th>Expiry Date</th>
     <th>Agent</th>
     <th>Life Assured</th>
-    <th>I/C No</th>
     <th>Proposer</th>
     <th>Premium</th>
+    <th>Last Renew date / Year</th>
     <th>Action</th>
   </tr>
   </thead>
@@ -66,15 +69,15 @@
   <% for ex in @proposals %>
     <% proposal = ex.proposal %>
     <tr class="<%= cycle "odd", "even"  %>">
-      <td><%=h proposal.proposal_number %></td>
+      <td style="text-align: center"><%= check_box_tag "proposal[#{proposal.id}]" %></td>
       <td style="text-align: left"><%= proposal.policy_status %></td>
       <td style="text-align: center"><%=h proposal.expiry_date %></td>
       <td><%=h proposal.agent_name %></td>
       <td><%=h proposal.fullname %></td>
-      <td style="text-align: center"><%=h proposal.new_ic_number %></td>
       <td style="text-align: left"><%=h proposal.proposer_status %></td>
       <td style="text-align: right"><%=h number_to_currency(proposal.sum_assured) %></td>
-      
+      <% renewal = proposal.proposal_approvals.last %>
+      <td style="text-align: center"><%= "#{renewal.try(:approved_date)} / #{renewal.try(:approval_year)}" if renewal %></td>
       <td style="text-align: center">
       <%= link_to "Show", edit_proposal_approval_path(proposal) %>
      </td>
@@ -85,5 +88,6 @@
   <% end %>
    <br />
   <%= page_entries_info @proposals, :entry_name => 'proposal' %>
-
+    
+<% end %>
 

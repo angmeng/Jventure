@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :credit_points
 
-  map.resources :proposal_approvals, :member => {:renew => :post}, :collection => {:expired => :get, :send_reminder => :get}
+  map.resources :proposal_approvals, :member => {:renew => :post}, :collection => {:expired => :get, :send_reminder => :get,  :batch_renew => :post}
 
   map.resources :approvals, :member => {:import_csv => :get}
 

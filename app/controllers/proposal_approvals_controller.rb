@@ -13,7 +13,7 @@ class ProposalApprovalsController < ApplicationController
   def edit
     @proposal = Proposal.find(params[:id])
   end
-  
+
   def renew
     proposal = Proposal.find(params[:id])
     if params[:approval_date].blank?
@@ -26,6 +26,25 @@ class ProposalApprovalsController < ApplicationController
     end
   end
 
+  def batch_renew
+    params[:proposal] ||= []
+    if params[:approval_date].blank?
+      flash[:error] = "Please select a proper date"
+      redirect_to(proposal)
+    else
+      count = 0
+      params[:proposal].each do |proposal_id, content|
+        proposal = Proposal.find_by_id proposal_id
+        if proposal
+          proposal.renew(params[:approval_date], params[:renewal_year])
+          count += 1
+        end
+      end
+      flash[:notice] = "Total renewal count : #{count}"
+    end
+    redirect_to :action => "index"
+  end
+
   def send_reminder
     setting = Setting.first
     ExpiringProposal.all.each do |p|
@@ -33,7 +52,7 @@ class ProposalApprovalsController < ApplicationController
       result = (check =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i)
       EmailNotification::deliver_reminder(p.proposal) if result and result == 0
     end
-    
+
     EmailNotification::deliver_admin_reminder(setting.admin_email)
     flash[:notice] = "Reminder has been sent."
     Setting.first.update_attribute(:last_reminder_date, Date.today)

@@ -55,7 +55,7 @@ class Engineer
     unless ExpiringReport.first(:conditions => ["report_month = ? and report_year = ?", Date.today.month, Date.today.year])
       Proposal.all(:conditions => ["approved = true and deleted = false and void = false"]).each do |p|
         unless ExpiringProposal.first(:conditions => ["proposal_id = ? and agent_id = ?", p.id, p.investor_id])
-          if Date.today > (p.expiry_date.to_date - 1.month).end_of_month
+          if Date.today > (p.expiry_date.to_date - 2.month).end_of_month
             puts "Expired proposal found : #{p.policy_number} - #{p.expiry_date.to_date.strftime('%Y-%m-%d')}"
             ep = ExpiringProposal.new
             ep.proposal_id = p.id
@@ -68,6 +68,9 @@ class Engineer
             ep.assistant_chief_recruiter_upline_id = agent.upline.upline.upline_id rescue 0
             ep.chief_recruiter_upline_id           = agent.upline.upline.upline.upline_id rescue 0
             ep.save!
+            check = p.investor.email
+            result = (check =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i)
+            EmailNotification::deliver_reminder(p) if result and result == 0
             count += 1
             unless p.waiting_for_renewal?
               p.waiting_for_renewal = true
