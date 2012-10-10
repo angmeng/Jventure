@@ -75,7 +75,7 @@
       <td><%=h proposal.agent_name %></td>
       <td><%=h proposal.fullname %></td>
       <td style="text-align: left"><%=h proposal.proposer_status %></td>
-      <td style="text-align: right"><%=h number_to_currency(proposal.sum_assured) %></td>
+      <td style="text-align: right"><%=h number_to_currency(proposal.modal_premium) %></td>
       <% renewal = proposal.proposal_approvals.last %>
       <td style="text-align: center"><%= "#{renewal.try(:approved_date)} / #{renewal.try(:approval_year)}" if renewal %></td>
       <td style="text-align: center">
