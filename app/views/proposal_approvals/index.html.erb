@@ -2,7 +2,7 @@
 <script type="text/javascript">
   function show_process() {
 		document.getElementById("process").style.display="block";
-                document.getElementById("reminder").style.display="none";
+    document.getElementById("reminder").style.display="none";
 	}
 </script>
  <%= javascript_include_tag("smo") %>
@@ -19,24 +19,28 @@
 
 <% unless @proposals.empty? %>
   <%= link_to("Send reminder ", send_reminder_proposal_approvals_path,:onclick => "show_process();", :id => "reminder") %>
-<em>This will takes fews minutes</em>
+<em> (This will takes fews minutes ) </em>
 <%= image_tag("process.gif", :style => "display:none", :id => "process") %>
 <% end %>
 
 <br /><br />
 <% form_for @search do |f| %>
-<table>
+<table style="width:80%">
   <tr>
-    <th>Proposal No</th>
-    <th>Policy Number</th>
-    <th>New IC No</th>
-    <th>Action</th>
+    <th style="text-align:left">Proposal No</th>
+    <th style="text-align:left">Policy Number</th>
+    <th style="text-align:left">New IC No</th>
+    <th style="text-align:left">Expired date From</th>
+    <th style="text-align:left">Expired date To</th>
+    <th style="text-align:left">Action</th>
   </tr>
 
   <tr>
     <td><%= f.text_field :proposal_number_equals  %> </td>
     <td><%= f.text_field :policy_number_equals %></td>
     <td><%= f.text_field :new_ic_number_like %></td>
+    <td><%= calendar_date_select_tag "search_date[from]" %> </td>
+    <td><%= calendar_date_select_tag "search_date[to]" %> </td>
     <td><%= f.submit "Search" %></td>
   </tr>
 

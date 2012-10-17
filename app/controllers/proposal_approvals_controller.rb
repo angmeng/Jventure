@@ -5,7 +5,7 @@ class ProposalApprovalsController < ApplicationController
   def index
     @last_date = Setting.first.last_reminder_date
     @search = Proposal.search(params[:search])
-    @proposals = ExpiringProposal.expired(@search.all)
+    @proposals = ExpiringProposal.expired(@search.all, params[:search_date])
     @proposals = @proposals.paginate(:page => params[:page], :per_page => 30)
   end
 

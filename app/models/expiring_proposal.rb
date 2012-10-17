@@ -11,10 +11,17 @@ class ExpiringProposal < ActiveRecord::Base
     all(:conditions => ["agent_id = ? or rookie_upline_id = ? or senior_recruiter_upline_id = ? or assistant_chief_recruiter_upline_id = ? or chief_recruiter_upline_id = ?", user_id, user_id, user_id, user_id, user_id])
   end
 
-  def self.expired(targets)
+  def self.expired(targets, params_date = nil)
     result = []
     all.each do |i|
-      result << i if targets.include?(i.proposal)
+      if params_date
+        prop = i.proposal
+        if targets.include?(prop)
+          result << i if prop.expiry_date.to_date >= Date.parse(params_date[:from]) && prop.expiry_date.to_date <= Date.parse(params_date[:to])
+        end
+      else
+        result << i if targets.include?(i.proposal)
+      end
     end
     result
   end
