@@ -10,7 +10,7 @@ class Proposal < ActiveRecord::Base
   has_one :proposer, :through => :proposed_person
   has_many :commission_transactions, :conditions => "supplementary = false"
   has_many :supplementary_commission_transactions, :class_name => "CommissionTransaction", :conditions => "supplementary = true"
-  has_many :proposal_approvals, :order => "approval_year"
+  has_many :proposal_approvals
   has_many :expiring_proposals
 
 
@@ -389,7 +389,7 @@ class Proposal < ActiveRecord::Base
     else
       last = proposal_approvals.last
       item_approved_date = last.approved_date
-      item_expired_date  = last.expired_date.to_date
+      item_expired_date  = last.individual_expiry_date
     end
     
     if item_approved_date < target_date.to_date

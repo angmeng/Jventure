@@ -6,7 +6,7 @@ class AgentsController < ApplicationController
   def index
     if is_admin?
       @search = Agent.search(params[:search])
-      @agents = @search.all(:select => "id, fullname, code, upline_id, new_ic_number", :include => [:upline]).paginate(:page => params[:page], :per_page => 30)
+      @agents = @search.all(:select => "agents.id, agents.fullname, agents.code, agents.upline_id, agents.new_ic_number", :joins => :upline).paginate(:page => params[:page], :per_page => 30)
     else
       setting = Setting.first
       if setting.agent_open_registration_level == Setting::DISABLE
@@ -16,7 +16,7 @@ class AgentsController < ApplicationController
       elsif setting.agent_open_registration_level == Setting::DIRECT_ONLY
         @search = Agent.search(params[:search])
         @search = @search.upline_id_equals(session[:agent_id])
-        @agents = @search.all(:select => "id, fullname, code, upline_id, new_ic_number", :include => [:upline]).paginate(:page => params[:page], :per_page => 30)
+        @agents = @search.all(:select => "agents.id, agents.fullname, agents.code, agents.upline_id, agents.new_ic_number", :joins => :upline).paginate(:page => params[:page], :per_page => 30)
       elsif setting.agent_open_registration_level == Setting::OPEN
         @search = Agent.search(params[:search])
         agents = @search.all
@@ -24,16 +24,27 @@ class AgentsController < ApplicationController
         filtered = agent.filter(agents)
         @agents = filtered.paginate(:page => params[:page], :per_page => 30)
       end
-      
     end
   end
 
   def contact
     if is_admin?
-      
       respond_to do |wants|
         wants.html {
-          @agents = Agent.all(:order => "code", :include => :upline).paginate(:page => params[:page], :per_page => 30)
+          @search = Agent.search(params[:search])
+          if params[:filter_email]
+            if params[:search] && params[:search][:order]
+              @agents = @search.all(:joins => :upline, :group => "email").paginate(:page => params[:page], :per_page => 30)
+            else
+              @agents = @search.all(:order => "code", :joins => :upline, :group => "email").paginate(:page => params[:page], :per_page => 30)
+            end
+          else
+            if params[:search] && params[:search][:order]
+              @agents = @search.all(:joins => :upline).paginate(:page => params[:page], :per_page => 30)
+            else
+              @agents = @search.all(:order => "code", :joins => :upline).paginate(:page => params[:page], :per_page => 30)
+            end
+          end
           }
         wants.pdf { 
           output = Report.new.contact

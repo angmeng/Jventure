@@ -3,16 +3,40 @@
 <%= link_to "PDF", contact_agents_path(:format => "pdf") %>
 <br />
 
+<% form_for @search do |f| %>
+<table style="width:70%">
+  <tr>
+    <th>Code</th>
+    <th>Fullname</th>
+    <th>New Ic Number</th>
+    <th>Email</th>
+    <th></th>
+    <th>Action</th>
+  </tr>
+
+  <tr>
+    <td><%= f.text_field :code_equals  %> </td>
+    <td><%= f.text_field :fullname_like  %> </td>
+    <td><%= f.text_field :new_ic_number_equals %></td>
+    <td><%= f.text_field :email_like  %></td>
+    <td> <%= check_box_tag "filter_email" %> Filter Email </td>
+    <td><%= f.submit "Search" %></td>
+  </tr>
+</table>
+<% end %>
+<br />
+
+
 <% paginated_section @agents do %>
 <br /><br />
 <table class="list">
   <thead>
     <tr>
-    <th>Code</th>
-    <th>Upline</th>
-    <th>Email</th>
-    <th>Mobile</th>
-    <th>Bank Account</th>
+    <th style="text-align:left"><%= order @search, :by => :code %></th>
+    <th style="text-align:left">Upline</th>
+    <th style="text-align:left"><%= order @search, :by => :email %></th>
+    <th style="text-align:left">Mobile</th>
+    <th style="text-align:left">Bank Account</th>
     <th>Birthday</th>
   </tr>
 </thead>
