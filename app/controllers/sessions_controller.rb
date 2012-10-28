@@ -49,8 +49,13 @@ class SessionsController < ApplicationController
         clear_sessions
         flash[:notice] = "You have been logged out"
         redirect_to home_url
+      else
+        clear_sessions
+        flash[:notice] = "You have been logged out"
+        redirect_to home_url
       end
     rescue
+      clear_sessions
       flash[:notice] = "You have been logged out"
       redirect_to home_url
     end

@@ -127,6 +127,10 @@ class Agent < ActiveRecord::Base
     end
   end
   
+  def upline_name_for_agent
+    upline.screen_name if upline
+  end
+  
   def upline_name_for_agent=(name)
     if name.blank?
       self.upline_id = 0
@@ -139,11 +143,6 @@ class Agent < ActiveRecord::Base
       end
     end
   end
-  
-  def upline_name_for_agent
-    upline.screen_name if upline
-  end
-  
 
   def upline_must_not_himself
     errors.add_to_base("cannot add agent himself as his upline") if upline_id == id
