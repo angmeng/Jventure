@@ -172,13 +172,13 @@ class Agent < ActiveRecord::Base
     checked     = false
     #search_date = search_proposal.approval_date_for_overriding.to_date
     target      = []
-    sales.all(:conditions => ["approval_date <= ?", search_date], :select => ["id, approval_date, modal_premium, mode_of_payment_id"]).each do |i|
+    sales.all(:conditions => ["approval_date <= ?", search_date], :select => "id, approval_date, modal_premium, mode_of_payment_id").each do |i|
       target << i if i.check_qualification(search_date)
     end
     
     if target.size.to_i >= 6
       total = target.inject(0) {|sum, c| sum += c.modal_premium}
-      checked = true if total.to_f >= 16920.00            
+      checked = true if total.to_f >= 16920.00
     end
     
     checked

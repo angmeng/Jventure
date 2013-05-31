@@ -1,6 +1,14 @@
 <% form_for @agent do |f| %>
   <%= f.error_messages %>
 
+<% if is_admin? %>
+ <p>
+    <%= f.label :code %><br />
+    <%= f.text_field :code, :maxlength => 100, :size => 45 %>
+  </p>
+
+ <% end %>
+
   <p>
     <%= f.label :fullname %><br />
     <%= f.text_field :fullname, :maxlength => 100, :size => 45 %>
@@ -61,8 +69,8 @@
   </p>
 
    <!--<p>
-    <% f.label :upline_id %><br />
-    <% f.select :upline_id, Agent.all(:order => "code").map {|ag| [ag.screen_name, ag.id]}, {:include_blank => true} %>
+    <%# f.label :upline_id %><br />
+    <%# f.select :upline_id, Agent.all(:order => "code").map {|ag| [ag.screen_name, ag.id]}, {:include_blank => true} %>
   </p>-->
 
   <% if is_admin? %>

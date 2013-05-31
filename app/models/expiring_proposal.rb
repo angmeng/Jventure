@@ -15,12 +15,16 @@ class ExpiringProposal < ActiveRecord::Base
     result = []
     all.each do |i|
       if params_date
-        prop = i.proposal
-        if targets.include?(prop)
-          result << i if prop.expiry_date.to_date >= Date.parse(params_date[:from]) && prop.expiry_date.to_date <= Date.parse(params_date[:to])
+        unless params_date[:from].blank? && params_date[:to].blank?
+          prop = i.proposal
+          if targets.include?(prop)
+            result << i if prop.expiry_date.to_date >= Date.parse(params_date[:from]) && prop.expiry_date.to_date <= Date.parse(params_date[:to])
+          end
+        else
+          result << i if targets.include?(i.proposal)
         end
       else
-        result << i if targets.include?(i.proposal)
+        result << i
       end
     end
     result

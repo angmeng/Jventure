@@ -32,4 +32,11 @@ class EmailNotification < ActionMailer::Base
     content_type "text/html"
   end
 
+  def test
+    recipients   "angmeng@gmail.com"
+    from         "info@hkventures.com.my"
+    subject      "Test email"
+    content_type "text/html"
+  end
+
 end

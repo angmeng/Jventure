@@ -234,7 +234,7 @@ class CommissionTransactionsController < ApplicationController
       else
         found = CommissionGeneration.first(:conditions => ["Month(generate_date) = ? and Year(generate_date) = ? and commission_day_id = ?",@month.to_i, @year.to_i, comm_day.id])
         if found
-          @msg << "Warning! " + comm_day.description + " is already generated before<br />"
+          @msg << "Warning! " + comm_day.description + " is already generated before this<br />"
         else
           CommissionGeneration.create(:generate_date => Date.parse(run_date).end_of_month, :commission_day_id => comm_day.id)
           calculate(comm_day)
@@ -257,11 +257,18 @@ class CommissionTransactionsController < ApplicationController
       if comm_day.overriding_commission?
         p.calculate_overriding_commission(@to)
       end
+      # check service charges
+      agent_proposal = p.agent.own_proposal
+      OverridingCharge.check_agent(@to, p.agent_id) if agent_proposal && agent_proposal.check_qualification(@to)
     end
+
     if comm_day.renewal?
       found_renewals.each do |r|
         r.calculate_base_commission(@to)
         r.calculate_overriding_commission(@to)
+        # check service charges
+        agent_proposal = r.proposal.agent.own_proposal
+        OverridingCharge.check_agent(@to, r.proposal.agent_id) if agent_proposal && agent_proposal.check_qualification(@to)
       end
     end
   end

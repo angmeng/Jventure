@@ -1,18 +1,24 @@
 class OverridingCharge
 
-  def self.check_agent(receiver, date_to, renew, charger_year)
-    charger = ServicesCharger.first(:conditions => ["start_from <= ? and end_date >= ?", date_to, date_to]) 
-    unless MiscellaneousItem.first(:conditions => ["overriding_charger = true and builtin = true and agent_id = ?", receiver.id])
-      MiscellaneousItem.create!(:overriding_charger => true, :builtin => true, :agent_id => receiver.id, :payment_fee_id => 0, :transaction_date => date_to, :title => charger.entry_title, :description => charger.entry_description , :amount => charger.entry_amount, :charger_year => 1)
-    else
-      agent_proposal = receiver.own_proposal
-      if agent_proposal
-        agent_current_policy_year = receiver.own_proposal.current_approval_year
-        unless MiscellaneousItem.first(:conditions => ["overriding_charger = true and builtin = true and agent_id = ? and charger_year = ?", receiver.id, agent_current_policy_year])
-          MiscellaneousItem.create!(:overriding_charger => true, :builtin => true, :agent_id => receiver.id, :payment_fee_id => 0, :transaction_date => date_to, :title => charger.renewal_title, :description => charger.renewal_description , :amount => charger.renewal_amount, :charger_year => agent_current_policy_year) if charger
+  def self.check_agent(date_to, agent_id)
+    current_year = date_to.year
+    chargers = ServicesCharger.all(:conditions => ["end_date >= ?", date_to])
+    chargers.each do |charger|
+      #File.open("test.txt", "a") {|f|
+      # f.puts "Checking agent id : #{agent_id}, date : #{date_to.to_s}"
+      first_misc = MiscellaneousItem.first(:conditions => ["overriding_charger = true AND builtin = true AND agent_id = ?", agent_id])
+      if first_misc
+        #f.puts "Misc item exist in all, continue checking ..."
+        unless MiscellaneousItem.first(:conditions => ["overriding_charger = true AND builtin = true AND agent_id = ? AND charger_year = ?", agent_id, current_year])
+          #f.puts "Misc item for the current year not found, creating one"
+          MiscellaneousItem.create!(:overriding_charger => true, :builtin => true, :agent_id => agent_id, :payment_fee_id => 0, :transaction_date => date_to, :title => charger.renewal_title, :description => charger.renewal_description , :amount => charger.renewal_amount, :charger_year => current_year)
         end
+      else
+        #f.puts "Misc item not exist in all, creating one"
+        MiscellaneousItem.create!(:overriding_charger => true, :builtin => true, :agent_id => agent_id, :payment_fee_id => 0, :transaction_date => date_to, :title => charger.entry_title, :description => charger.entry_description , :amount => charger.entry_amount, :charger_year => date_to.year)
       end
-    end if charger
+      #}
+    end
   end
 
 end

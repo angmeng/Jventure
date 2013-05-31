@@ -24,7 +24,7 @@ class Proposal < ActiveRecord::Base
   validates_numericality_of :proposer_new_ic_number,  :if => :proposal_has_proposer?
   
   before_save :base_setup
-  after_update :check_upline, :check_investor_code
+  after_update :check_upline#, :check_investor_code
 
   named_scope :approved_proposals, {:conditions => ["approved = true and deleted = false and void = false"]}
   named_scope :requested_approvals, lambda {|from_date, to_date| {:conditions => ["approved = true and deleted = false and void = false and approval_date >= ? and approval_date <= ? ", from_date, to_date]}}
@@ -423,7 +423,6 @@ class Proposal < ActiveRecord::Base
     while hit == false
       if target
         if target.check_qualification(to_date)
-          
           Commission.add_transaction(self, receiver.id, 0, current_policy_year, to_date)
           SubCommission.add_transaction(self, receiver.id, 0, current_policy_year) if supplementary_apply?
           hit = true
@@ -438,13 +437,11 @@ class Proposal < ActiveRecord::Base
           end
         end
       else
-        
         Commission.add_transaction(self, receiver.id, 0, current_policy_year, to_date)
         SubCommission.add_transaction(self, receiver.id, 0, current_policy_year) if supplementary_apply?
         hit = true
       end
     end
-    
   end
 
   def calculate_overriding_commission(check_date)
@@ -462,19 +459,17 @@ class Proposal < ActiveRecord::Base
         target = receiver.own_proposal
         if target
           if target.check_qualification(check_date)
-            
             Commission.add_transaction(self, receiver.id, top, current_policy_year, check_date)
             SubCommission.add_transaction(self, receiver.id, top, current_policy_year) if supplementary_apply?
           end
         else
-          
           Commission.add_transaction(self, receiver.id, top, current_policy_year, check_date)
           SubCommission.add_transaction(self, receiver.id, top, current_policy_year) if supplementary_apply?
         end
         top += 1
       else
         receiver = checker
-      end 
+      end
     end until top > 4
   end
 

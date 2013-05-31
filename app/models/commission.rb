@@ -50,7 +50,7 @@ class Commission < ActiveRecord::Base
         if receiver_id > Agent::MASTER
           agent = Agent.find(receiver_id)
           PaymentFee.find_payment_fee(agent, date_to)
-          OverridingCharge.check_agent(agent, date_to, false, current_case_year) if level_id == 0
+          #OverridingCharge.check_agent(agent, date_to, false, current_case_year) if level_id == 0
         end
       end
     end
@@ -86,7 +86,7 @@ class Commission < ActiveRecord::Base
         if receiver_id > Agent::MASTER
           agent = Agent.find(receiver_id)
           PaymentFee.find_payment_fee(agent, date_to)
-          OverridingCharge.check_agent(agent, date_to, true, renew_item.approval_year) if level_id == 0
+          #OverridingCharge.check_agent(agent, date_to, true, renew_item.approval_year) if level_id == 0
         end
       end
     end
